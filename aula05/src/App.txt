@@ -1,0 +1,111 @@
+import React, { useState } from 'react';
+import Filho from './component/Filho'
+// import './App.css';
+
+const estilos = {
+    fundo: {
+        width: "600px",
+        backgroundColor: "#222",
+        color: "white",
+        borderRadius: "10px",
+        padding: "20px",
+        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+    },
+    superior:{
+        width: "100%",
+        textAlign: "center",
+        marginBottom: "10px",
+        
+    },
+    input: {
+        width: "90%",
+        height: "50px",
+        fontSize: "20px",
+        textAlign: "right",
+        padding: "10px",
+        border: "none",
+        borderRadius: "5px",
+        backgroundColor: "#333",
+        color: "white",
+        outline: "none",
+
+    },
+    numero:{
+        fontSize:"30px",
+        color:"white",
+    },
+    botoes:{
+        width: "100%",
+        display: "grid",
+        gridTemplateColumns: "repeat(4, 1fr)",
+        gap: "8px",
+        paddingTop: "10px",
+
+    }
+}
+
+const App = () =>  {
+    // const App = () =>  {
+    //     const Recebe = (valor) => {
+    //         var formula = "5 + 8 * 9 - 6 + 36 "
+    //         var resultado = eval(formula)
+    //         console.log(resultado)
+    //     }
+
+    
+    //sempre ira iniciar vazio
+    const [valorInput, setValorInput] = useState("");
+
+    // funçao que recebe o valor digitado
+    const Recebe = (valor) => {
+        if (valor === "C") {
+            setValorInput(""); // Lsimpa o input
+        } else if (valor === "=") {
+            try {
+                setValorInput(eval(valorInput)); // Calcula o ressultado
+            } catch (error) {
+                setValorInput("Erro na conta"); // Caso tenha erro na conta
+            }
+        } else {
+            setValorInput(valorInput + valor); // Adiciona os valores digitados
+        }
+    };
+    return(
+        <div style={estilos.fundo}>
+            <div style={estilos.superior}>
+                <div style={estilos.numero}>
+                    Calculadora
+                </div>
+                <input style={estilos.input} type = "text" value={valorInput} /> 
+            </div>
+
+            <div style={estilos.botoes}>
+                        <Filho valor="1" cor="#EEE" callback={Recebe} />
+                        <Filho valor="2" cor="#EEE" callback={Recebe} />
+                        <Filho valor="3" cor="#EEE" callback={Recebe} />
+                        <Filho valor="+" cor="yellow" callback={Recebe} />
+
+                        <Filho valor="4" cor="#EEE" callback={Recebe} />
+                        <Filho valor="5" cor="#EEE" callback={Recebe} />
+                        <Filho valor="6" cor="#EEE" callback={Recebe} />
+                        <Filho valor="-" cor="yellow" callback={Recebe} />
+
+                        <Filho valor="7" cor="#EEE" callback={Recebe} />
+                        <Filho valor="8" cor="#EEE" callback={Recebe} />
+                        <Filho valor="9" cor="#EEE" callback={Recebe} />
+                        <Filho valor="*" cor="yellow" callback={Recebe} />
+
+                        <Filho valor="C" cor="yellow" callback={Recebe} />
+                        <Filho valor="0" cor="#EEE" callback={Recebe} />
+                        <Filho valor="=" cor="yellow" callback={Recebe} />
+                        <Filho valor="/" cor="yellow" callback={Recebe} />
+            </div>
+        </div>
+    )
+    
+}
+
+export default App;
