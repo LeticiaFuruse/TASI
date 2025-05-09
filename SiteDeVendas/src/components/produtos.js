@@ -1,26 +1,24 @@
 import React, {useState} from "react";
 import axios from "axios";
 
-const Produtos = () =>{
-    var [criarUsuario, setCriarUsuario] = useState('')
-    var [criarNomeProduto, setCriarNomeProduto] = useState('')
-    var [criarQuantidadeProduto, setCriarQuantidadeProduto] = useState('')
-    var [criarPrecoProduto, setCriarPrecoProduto] = useState('')
-    var [criarCategoria, setCategoria] = useState('')
-    var [criarDescricao, setCriarDescricao] = useState('')
-    var [criarImagem, setCriarImagem] = useState('')
+const Produtos = () => {
+    var [nome, setNomeProduto] = useState('')
+    var [quantidade, setQuantidadeProduto] = useState('')
+    var [preco, setPrecoProduto] = useState('')
+    var [categoria, setCategoria] = useState('')
+    var [descricao, setDescricao] = useState('')
+    var [imagem, setImagem] = useState('')
     
-    
+    // função para criar um novo produto
     const registroNovoProduto = async () => {
         var url = "https://backend-completo.vercel.app/app/produtos"
         var dados = {
-            nome: criarNomeProduto,
-            quantidade: criarQuantidadeProduto,
-            preco: criarPrecoProduto,
-            categoria: criarCategoria,
-            descricao: criarDescricao,
-            usuario: criarUsuario,
-            imagem: criarImagem
+            nome: nome,
+            quantidade: quantidade,
+            preco: preco,
+            categoria: categoria,
+            descricao: descricao,
+            imagem: imagem
 
         }
 
@@ -31,7 +29,7 @@ const Produtos = () =>{
             dados,
             {headers: { Authorization: `Bearer ${token}` }}
         ).then(retorno =>{
-            console.log( retorno )
+            
             if (retorno.data.error){
                 alert(retorno.data.error + " Erro ao registrar")
                 console.log(retorno)
@@ -39,29 +37,25 @@ const Produtos = () =>{
             }
             if(retorno.data._id){
                 alert("Registrado com sucesso")
+                console.log(retorno)
             }
         })
     }
-
-    
-    
     
     return(
         <div>
 
             <h1>Registrar Produtos</h1>
 
-
-            <input type="text" placeholder="Usuario" onChange={(e) => setCriarUsuario(e.target.value)}/>
-            <input type="text" placeholder="Nome do produto" onChange={(e) => setCriarNomeProduto(e.target.value)}/>
-            <input type="number" placeholder="Quantidade" onChange={(e) => setCriarQuantidadeProduto(e.target.value)}/>
-            <input type="number" placeholder="Preço do produto" onChange={(e) => setCriarPrecoProduto(e.target.value)}/>
+            <input type="text" placeholder="Nome do produto" onChange={(e) => setNomeProduto(e.target.value)}/>
+            <input type="number" placeholder="Quantidade" onChange={(e) => setQuantidadeProduto(e.target.value)}/>
+            <input type="number" placeholder="Preço do produto" onChange={(e) => setPrecoProduto(e.target.value)}/>
 
             {/* MUDAR TIPOS DE INPUT PARA SELECIONAR A CATEGORIA */}
             <input type="text" placeholder="Categoria do produto" onChange={(e) => setCategoria(e.target.value)}/>
 
-            <input type="text" placeholder="Descrição do produto" onChange={(e) => setCriarDescricao(e.target.value)}/>
-            <input type="text" placeholder="URL da imagen do produto" onChange={(e) => setCriarImagem(e.target.value)}/>
+            <input type="text" placeholder="Descrição do produto" onChange={(e) => setDescricao(e.target.value)}/>
+            <input type="text" placeholder="URL da imagem do produto" onChange={(e) => setImagem(e.target.value)}/>
 
 
             <input type="button" value="Registrar" onClick={() => registroNovoProduto()}/>
