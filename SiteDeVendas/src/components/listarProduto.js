@@ -64,10 +64,9 @@ const ListarProduto = () => {
               <td>{prod.descricao}</td>
               <td>
                 {prod.imagem}
-                {/* Mostra a imagem do produto se tiver URL válida */}
-                {/* <img src={produto.Imagem} alt="Imagem do produto" width={80} /> */}
               </td>
               <td>
+                {/* pega o id do produto */}
                 <Link to={`/editarProduto/${prod._id}`}>Editar</Link>
               </td>
               <td><Link to="/excluirProduto">Excluir</Link></td>

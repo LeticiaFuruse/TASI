@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 
 const LimparTabelas = () => {
-
 
     const limparTabelas = async () => {
         var url = "https://backend-completo.vercel.app/app/"
@@ -12,14 +11,12 @@ const LimparTabelas = () => {
             url,
             { headers: { Authorization: `Bearer ${token}` } }
         ).then(retorno => {
-            console.log(retorno)
-            if (retorno.data.error) {
-                alert(retorno.data.error + " Erro ao limpar")
-                console.log(retorno)
+            if (retorno.data.erro) {
+                alert(retorno.data.erro)
                 return
             }
             if (retorno.status === 200) {
-                alert("Limpo com sucesso")
+                alert(retorno.data.mensagem)
                 console.log(retorno)
             }
         })
@@ -29,7 +26,7 @@ const LimparTabelas = () => {
     return (
         <div>
             <h1>Limpar Todas as Tabelas</h1>
-            <input type="button" value="Limpar"/>
+            <input type="button" value="Limpar Tabelas" onClick={() => limparTabelas()}/>
         </div>
     )
 }

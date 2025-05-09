@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom"; // pegar o id do prodto da URL
 
 const EditarProduto = () => {
     const { id } = useParams();  // id  da URL
     const navigate = useNavigate();  // redirecionar após a edição
+
     var [nome, setNome] = useState('');
     var [quantidade, setQuantidade] = useState('');
     var [categoria, setCategoria] = useState('');
@@ -12,9 +13,18 @@ const EditarProduto = () => {
     var [descricao, setDescricao] = useState('');
     var [imagem, setImagem] = useState('');
 
+  //chama a função quando for carregada
+  useEffect(() => {
+    carregarProduto()
+  }, [])
+
     const carregarProduto = async () => {
         var url = `https://backend-completo.vercel.app/app/produto/${id}`;
         var token = localStorage.getItem("ALUNO_ITE");
+        
+        //teste
+        console.log("Token:", token)
+        console.log("URL da requisição:", url);
 
         await axios.get(
             url,
@@ -40,14 +50,16 @@ const EditarProduto = () => {
         var url = `https://backend-completo.vercel.app/app/produto/${id}`;
         var dados = {
             nome: nome,
-            quantidade: quantidade,
-            preco: preco,
-            descricao: descricao,
-        };
+            quantidade,
+            preco,
+            descricao,
+        }
         var token = localStorage.getItem("ALUNO_ITE");
 
-        await axios.put(url, dados, {
-            headers: { Authorization: `Bearer ${token}` }
+        await axios.put(
+            url, 
+            dados,
+            { headers: { Authorization: `Bearer ${token}` }
         }).then(retorno => {
             if (retorno.data.error) {
                 alert(retorno.data.error + " Erro ao editar produto");
@@ -58,14 +70,14 @@ const EditarProduto = () => {
                 alert("Produto editado com sucesso");
                 navigate("/produtos");  // volta para lista de produtos 
             }
-        });
-    };
+        })
+    }
 
     return (
         <div>
             <h1>Editar Produto</h1>
                 <div>
-                    <h2>Nome do Produto</h2>
+                    <label>Nome do Produto</label>
                     <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} />
                 </div>
             <div>
@@ -95,7 +107,7 @@ const EditarProduto = () => {
             </div>
 
         </div>
-    );
-};
+    )
+}
 
 export default EditarProduto;

@@ -45,7 +45,7 @@ const App = () => {
                     <Link to="/listarCategoria">Listar Categoria</Link>
                     <Link to="/Venda">Venda</Link>
                     <Link to="/Editar">Editar Produto</Link>
-                    <Link to="/LimparTabelas">Limpar</Link>
+                    <Link to="/limparTabelas">Limpar</Link>
                 </nav>
 
                 <Routes>
@@ -61,7 +61,7 @@ const App = () => {
                         <Route path="/listarCategoria" element={<ListarCategoria />} />
                         <Route path="/venda" element={<Venda />} />
                         <Route path="/editarProduto/:id" element={<EditarProduto />} />
-                        <Route path="/limparTabelas/:id" element={<LimparTabelas />} />
+                        <Route path="/limparTabelas" element={<LimparTabelas />} />
                     </Route>
                 </Routes>
             </div>

@@ -65,9 +65,11 @@ const Venda = () => {
             <input type="date" onChange={(e) => setData(e.target.value)} />
             {produtos.map((produto, indice) => (
                 <div key={indice}>
+                    <img width={80} src={produto.imagem} alt={produto.nome} />
                     <h2>{produto.nome}</h2>
                     <h2>{produto.quantidade}</h2>
                     <h2>{produto.preço}</h2>
+                    
                     <input type="checkbox" onChange={(e) => {
                         if(e.target.checked){
                             setProdutosVendidos([...produtosVendidos, produto])
