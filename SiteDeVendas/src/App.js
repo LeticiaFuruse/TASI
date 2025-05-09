@@ -14,6 +14,8 @@ import Pessoas from './components/pessoas';
 import Login from './components/login';
 import Registro from './components/registro';
 import ListarProduto from './components/listarProduto';
+import Categorias from './components/categorias';
+import ListarCategoria from './components/listarCategorias';
 
 const Middleware = () => {
     var logado = localStorage.getItem("ALUNO_ITE");
@@ -36,6 +38,8 @@ const App = () => {
                     <Link to="/registro">Registro</Link>
                     <Link to="/login">Login</Link>
                     <Link to="/listarProduto">Listar Produto</Link>
+                    <Link to="/categorias">Categoria</Link>
+                    <Link to="/listarCategoria">Listar Categoria</Link>
                 </nav>
 
                 <Routes>
@@ -47,6 +51,8 @@ const App = () => {
                         <Route path="/produtos" element={<Produtos />} />
                         <Route path="/pessoas" element={<Pessoas />} />
                         <Route path="/listarProduto" element={<ListarProduto />} />
+                        <Route path="/categorias" element={<Categorias />} />
+                        <Route path="/listarCategoria" element={<ListarCategoria />} />
                     </Route>
                 </Routes>
             </div>

@@ -9,7 +9,7 @@ const Produtos = () => {
     var [descricao, setDescricao] = useState('')
     var [imagem, setImagem] = useState('')
     
-    // função para criar um novo produto
+    // conexão com o banco para a função para criar um novo produto
     const registroNovoProduto = async () => {
         var url = "https://backend-completo.vercel.app/app/produtos"
         var dados = {
@@ -41,6 +41,7 @@ const Produtos = () => {
             }
         })
     }
+
     
     return(
         <div>

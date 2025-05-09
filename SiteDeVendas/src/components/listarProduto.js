@@ -27,7 +27,9 @@ const ListarProduto = () => {
             console.log(retorno)
         }
     })
-}
+  }
+
+
 
 
   return (
@@ -49,20 +51,23 @@ const ListarProduto = () => {
           </tr>
         </thead>
         <tbody>
+
           {/*  percorre array de produtos e cria uma linha para cada produto */}
-          {produtos.map((produto, index) => (
-            <tr key={index}>
-              <td>{produto.usuario}</td>
-              <td>{produto.nome}</td>
-              <td>{produto.quantidade}</td>
-              <td>{produto.preco}</td>
-              <td>{produto.categoria}</td>
-              <td>{produto.descricao}</td>
+          {produtos.map((prod, indice) => (
+            <tr value={indice}>
+              <td>{prod.usuario}</td> 
+              <td>{prod.nome}</td>
+              <td>{prod.quantidade}</td>
+              <td>{prod.preco}</td>
+              <td>{prod.categoria}</td>
+              <td>{prod.descricao}</td>
               <td>
-                {produto.imagem}
+                {prod.imagem}
                 {/* Mostra a imagem do produto se tiver URL válida */}
                 {/* <img src={produto.Imagem} alt="Imagem do produto" width={80} /> */}
               </td>
+              {/* <td><Link to="/editarProduto">Editar</Link></td>
+              <td><Link to="/excluirProduto">Excluir</Link></td> */}
             </tr>
           ))}
         </tbody>
