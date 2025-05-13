@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
   Link
@@ -7,6 +7,10 @@ import {
 const ListarProduto = () => {
   // começa um array vazio
   var [produtos, setProdutos] = useState([])
+
+  useEffect(() => {
+    listarProduto();
+  }, []);
 
   // executar a função
   const listarProduto = async () => {
@@ -24,7 +28,6 @@ const ListarProduto = () => {
         return
       }
       if (retorno.status === 200) {
-        alert("Mostrado com sucesso")
         setProdutos(retorno.data)
         console.log(retorno)
       }
@@ -35,7 +38,7 @@ const ListarProduto = () => {
     <div>
 
       <h1>Produtos</h1>
-      <input type="button" value="Listar todos" onClick={() => listarProduto()} />
+      
 
       <table border="1">
         <thead>
