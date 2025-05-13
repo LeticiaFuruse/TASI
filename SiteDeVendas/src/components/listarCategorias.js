@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const ListarCategorias = () => {
     var [categorias, setCategorias] = useState([])
 
+    useEffect(() => {
+        listarCategorias()
+    }, [])
 
     const listarCategorias = async () => {
         var url = "https://backend-completo.vercel.app/app/categorias"
@@ -20,7 +23,6 @@ const ListarCategorias = () => {
                 return
             }
             if (retorno.status === 200) {
-                alert("Mostrado com sucesso")
                 setCategorias(retorno.data)
                 console.log(retorno)
             }
@@ -30,7 +32,6 @@ const ListarCategorias = () => {
     return (
         <div>
             <h1>Categorias</h1>
-            <input type="button" value="Listar todos" onClick={() => listarCategorias()} />
 
             <table border="1">
                 <thead>
