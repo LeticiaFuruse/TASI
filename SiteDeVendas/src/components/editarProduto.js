@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom"; // pegar o id do prodto da URL
 
 const EditarProduto = () => {
-    const { id } = useParams();  // id  da URL
+    const { idProduto } = useParams();  // id  da URL
     const navigate = useNavigate();  // redirecionar após a edição
 
     var [nome, setNome] = useState('');
@@ -19,7 +19,7 @@ const EditarProduto = () => {
   }, [])
 
     const carregarProduto = async () => {
-        var url = `https://backend-completo.vercel.app/app/produto/${id}`;
+        var url = `https://backend-completo.vercel.app/app/produto/${idProduto}`;
         var token = localStorage.getItem("ALUNO_ITE");
         
         //teste
@@ -47,7 +47,7 @@ const EditarProduto = () => {
     };
 
     const editarProduto = async () => {
-        var url = `https://backend-completo.vercel.app/app/produto/${id}`;
+        var url = `https://backend-completo.vercel.app/app/produto/${idProduto}`;
         var dados = {
             nome: nome,
             quantidade,
