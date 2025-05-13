@@ -8,6 +8,8 @@ import {
     Outlet,
     Link
 } from 'react-router-dom';
+
+//puxa os arquivos que eu crio
 import Dashboard from './components/dashboard';
 import Pessoas from './components/pessoas';
 import Login from './components/login';
@@ -19,6 +21,7 @@ import ListarCategoria from './components/listarCategorias';
 import Venda from './components/venda';
 import ListarVendas from './components/listarVendas';
 import EditarProduto from './components/editarProduto';
+import EditarCategoria from './components/editarCategoria';
 import LimparTabelas from './components/limparTabelas';
 
 const Middleware = () => {
@@ -36,6 +39,8 @@ const App = () => {
         <BrowserRouter>
             <div>
                 <nav className="menu" style={{ display: "flex", gap: "10px" }}>
+
+                    {/* aparecer na tela */}
                     <Link to="/">Principal</Link>
                     <Link to="/pessoas">Pessoas</Link>
                     <Link to="/registro">Registro</Link>
@@ -46,7 +51,6 @@ const App = () => {
                     <Link to="/listarCategoria">Listar Categoria</Link>
                     <Link to="/Venda">Venda</Link>
                     <Link to="/listarVendas">Listar vendas</Link>
-                    <Link to="/Editar">Editar Produto</Link>
                     <Link to="/limparTabelas">Limpar</Link>
                 </nav>
 
@@ -55,6 +59,7 @@ const App = () => {
                     <Route path="/registro" element={<Registro />} />
 
                     <Route element={<Middleware />}>
+                    {/* rotas seguras = depois de logar */}
                         <Route path="/" element={<Dashboard />} />
                         <Route path="/produtos" element={<Produtos />} />
                         <Route path="/pessoas" element={<Pessoas />} />
@@ -63,7 +68,8 @@ const App = () => {
                         <Route path="/listarCategoria" element={<ListarCategoria />} />
                         <Route path="/venda" element={<Venda />} />
                         <Route path="/listarVendas" element={<ListarVendas />} />
-                        <Route path="/editarProduto/:id" element={<EditarProduto />} />
+                        <Route path="/editarProduto/:idProduto" element={<EditarProduto />} />
+                        <Route path="/editarCategoria/:idCategoria" element={<EditarCategoria />} />
                         <Route path="/limparTabelas" element={<LimparTabelas />} />
                     </Route>
                 </Routes>
