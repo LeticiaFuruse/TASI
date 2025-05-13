@@ -17,6 +17,7 @@ import ListarProduto from './components/listarProduto';
 import Categorias from './components/categorias';
 import ListarCategoria from './components/listarCategorias';
 import Venda from './components/venda';
+import ListarVendas from './components/listarVendas';
 import EditarProduto from './components/editarProduto';
 import LimparTabelas from './components/limparTabelas';
 
@@ -44,6 +45,7 @@ const App = () => {
                     <Link to="/categorias">Categoria</Link>
                     <Link to="/listarCategoria">Listar Categoria</Link>
                     <Link to="/Venda">Venda</Link>
+                    <Link to="/listarVendas">Listar vendas</Link>
                     <Link to="/Editar">Editar Produto</Link>
                     <Link to="/limparTabelas">Limpar</Link>
                 </nav>
@@ -60,6 +62,7 @@ const App = () => {
                         <Route path="/categorias" element={<Categorias />} />
                         <Route path="/listarCategoria" element={<ListarCategoria />} />
                         <Route path="/venda" element={<Venda />} />
+                        <Route path="/listarVendas" element={<ListarVendas />} />
                         <Route path="/editarProduto/:id" element={<EditarProduto />} />
                         <Route path="/limparTabelas" element={<LimparTabelas />} />
                     </Route>
