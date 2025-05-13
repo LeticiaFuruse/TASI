@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import {
+    Link
+} from 'react-router-dom';
 
 const ListarCategorias = () => {
     var [categorias, setCategorias] = useState([])
@@ -75,8 +78,8 @@ const ListarCategorias = () => {
                         <tr value={indice}>
                             <td>{categoria.usuario}</td>
                             <td>{categoria.nome}</td>
-                            <td>{categoria.nome}</td>
                             
+                                <td><Link to={`/editarCategoria/${categoria._id}`}>Editar</Link></td>
                                 <td><button onClick={() =>excluirCategoria(categoria._id)}>Excluir</button></td>
                         </tr>
                     ))}
