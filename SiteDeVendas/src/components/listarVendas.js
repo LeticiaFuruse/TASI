@@ -30,6 +30,34 @@ const ListarVendas = () => {
         })
     }
 
+//excluirVenda
+const excluirVenda = async (id) => {
+    var url = "https://backend-completo.vercel.app/app/venda"
+    var dados ={
+      id: id
+    }
+    var token = localStorage.getItem("ALUNO_ITE")
+
+    await axios.delete(url,{
+      data:dados,
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(retorno => {
+      console.log(retorno)
+      if (retorno.data.error) {
+        alert(retorno.data.error + " Erro ao mostrar")
+        console.log(id)
+        return
+      }
+      if (retorno.status === 200) {
+        alert("Excluido com sucesso")
+        console.log(retorno)
+        listarVendas()
+      }
+    })
+  }
+
+
+
     return (
         <div>
             <h1>Vendas</h1>
@@ -41,26 +69,28 @@ const ListarVendas = () => {
                         <th>Nome do cliente</th>
                         <th>Data</th>
                         <th>Produtos</th>
+                        <th>Editar</th>
+                        <th>Excluir</th>
                     </tr>
                 </thead>
                 <tbody>
 
                     {/*  percorre array de produtos e cria uma linha para cada produto */}
                     {vendas.map((venda, indice) => (
-                        <tr value={indice}>
+                        <tr key={indice}>
                             <td>{venda.usuario}</td>
                             <td>{venda.nomeCliente}</td>
                             <td>{venda.data}</td>
-
-
-
-                            <td>{produtos.map((produto, indice_prod) => (
+                            <td>{venda.produtos.map((produto, indice_prod) => (
                                 <div key={indice_prod}>
-                                    <label>{produto.nome}</label>
-                                    <label>{produto.quantidade}</label>
+                                    <label>{produto.nome}-</label>
+                                    <label>{produto.quantidade}-</label>
                                     <label>{produto.preco}</label>
                                 </div>
                             ))}</td>
+                            <td>{venda.data}</td>
+                            <td><button onClick={() =>excluirVenda(venda._id)}>Excluir</button></td>
+                            
 
 
                             

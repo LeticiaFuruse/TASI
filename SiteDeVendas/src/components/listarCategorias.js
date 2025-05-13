@@ -29,6 +29,32 @@ const ListarCategorias = () => {
         })
     }
 
+//escluir categoria
+    const excluirCategoria = async (id) => {
+    var url = "https://backend-completo.vercel.app/app/categorias"
+    var dados ={
+      id: id
+    }
+    var token = localStorage.getItem("ALUNO_ITE")
+
+    await axios.delete(url,{
+      data:dados,
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(retorno => {
+      console.log(retorno)
+      if (retorno.data.error) {
+        alert(retorno.data.error + " Erro ao mostrar")
+        console.log(id)
+        return
+      }
+      if (retorno.status === 200) {
+        alert("Excluido com sucesso")
+        console.log(retorno)
+        listarCategorias()
+      }
+    })
+  }
+
     return (
         <div>
             <h1>Categorias</h1>
@@ -38,6 +64,8 @@ const ListarCategorias = () => {
                     <tr>
                         <th>Usuário</th>
                         <th>Nome da categoria</th>
+                        <th>Editar</th>
+                        <th>Excluir</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,8 +75,9 @@ const ListarCategorias = () => {
                         <tr value={indice}>
                             <td>{categoria.usuario}</td>
                             <td>{categoria.nome}</td>
-                            {/* <td><Link to="/editarProduto">Editar</Link></td>
-                                <td><Link to="/excluirProduto">Excluir</Link></td> */}
+                            <td>{categoria.nome}</td>
+                            
+                                <td><button onClick={() =>excluirCategoria(categoria._id)}>Excluir</button></td>
                         </tr>
                     ))}
                 </tbody>
