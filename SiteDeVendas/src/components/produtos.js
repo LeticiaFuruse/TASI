@@ -30,6 +30,7 @@ const Produtos = () => {
             }
             if (retorno.status === 200) {
                 setCategorias(retorno.data)
+
                 console.log(retorno)
             }
         })
@@ -79,7 +80,7 @@ const Produtos = () => {
             {/* MUDAR TIPOS DE INPUT PARA SELECIONAR A CATEGORIA */}
             {categorias.map((categoria, indice) => (
                 <div key={indice}>
-                    <input type="radio" name="categoria" onChange={(e) => setCategoria(e.target.value)} />
+                    <input type="radio" name="categoria" value={categoria.nome} onChange={(e) => setCategoria(e.target.value)} />
                     {categoria.nome}
                 </div>
             ))}
