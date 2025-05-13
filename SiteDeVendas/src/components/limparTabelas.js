@@ -4,7 +4,7 @@ import axios from "axios";
 const LimparTabelas = () => {
 
     const limparTabelas = async () => {
-        var url = "https://backend-completo.vercel.app/app/"
+        var url = "https://backend-completo.vercel.app/app/limpar"
         var token = localStorage.getItem("ALUNO_ITE")
 
         await axios.get(
