@@ -48,75 +48,78 @@ const Categorias =() => {
 
 
 
-    return(
-        <Box sx={{ padding: 3 }}>
-            <Paper
-                elevation={3}
-                sx={{
-                    p: 3,
-                    margin: "0 auto",
-                    bgcolor: '#333', // Cor de fundo do Paper (preto fosco)
-                    color: '#fff', // Cor do texto (branco)
-                    borderRadius: 2,
-                    maxWidth: 400,
-                }}
-            >
-                <Typography
-                    variant="h4"
-                    gutterBottom
-                    align="center"
-                    sx={{
-                        fontSize: "36px",
-                        fontWeight: "bold",
-                        color: "#fff", // Cor do título (branco)
-                    }}
-                >
-                    Categoria
-                </Typography>
+return (
+  <Box sx={{ padding: 3 }}>
+    <Paper
+      elevation={3}
+      sx={{
+        p: 3,
+        margin: "0 auto",
+        bgcolor: '#333',
+        color: '#fff',
+        borderRadius: 2,
+        maxWidth: 400,
+      }}
+    >
+      <Typography
+        variant="h4"
+        gutterBottom
+        align="center"
+        sx={{
+          fontSize: "36px",
+          fontWeight: "bold",
+          color: "#fff",
+        }}
+      >
+        Categoria
+      </Typography>
 
-                <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                    <TextField
-                        label="Nome da Categoria"
-                        variant="outlined"
-                        fullWidth
-                        onChange={(e) => setNomeCategoria(e.target.value)}
-                        sx={{
-                            backgroundColor: "#555", // Cor de fundo do input (cinza escuro)
-                            color: "#fff", // Texto branco
-                            "& .MuiInputLabel-root": {
-                                color: "#fff" // Cor do label branco
-                            },
-                            "& .MuiOutlinedInput-root": {
-                                "& fieldset": {
-                                    borderColor: "#777" // Borda cinza claro
-                                },
-                                "&:hover fieldset": {
-                                    borderColor: "#fff" // Cor da borda ao passar o mouse
-                                },
-                                "&.Mui-focused fieldset": {
-                                    borderColor: "#fff" // Cor da borda quando estiver focado
-                                }
-                            }
-                        }}
-                    />
-                    <Button
-                        variant="contained"
-                        onClick={() => criarCategoria()}
-                        sx={{
-                            backgroundColor: "#444", // Cor de fundo do botão
-                            color: "#fff", // Texto branco
-                            fontWeight: "bold",
-                            "&:hover": {
-                                backgroundColor: "#666", // Cor ao passar o mouse
-                            }
-                        }}
-                    >
-                        Registrar
-                    </Button>
-                </Box>
-            </Paper>
-        </Box>
-    )
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <TextField
+          label="Nome da Categoria"
+          variant="outlined"
+          fullWidth
+          onChange={(e) => setNomeCategoria(e.target.value)}
+          sx={{
+            backgroundColor: "#555",
+            "& .MuiInputLabel-root": {
+              color: "#fff"
+            },
+            "& .MuiInputBase-input": {
+              color: "#fff" // COR DO TEXTO DIGITADO
+            },
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "#777"
+              },
+              "&:hover fieldset": {
+                borderColor: "#fff"
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "#fff"
+              }
+            }
+          }}
+        />
+        <Button
+          variant="contained"
+          onClick={() => criarCategoria()}
+          sx={{
+            backgroundColor: "#1976d2", // COR DIFERENTE DO BOTÃO
+            color: "#fff",
+            fontWeight: "bold",
+            "&:hover": {
+              backgroundColor: "#115293",
+            }
+          }}
+        >
+          Registrar
+        </Button>
+      </Box>
+    </Paper>
+  </Box>
+);
+
 }
 
 export default Categorias

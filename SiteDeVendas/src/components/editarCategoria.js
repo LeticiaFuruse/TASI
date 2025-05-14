@@ -2,6 +2,15 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom"; // pegar o id do prodto da URL
 
+
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Paper,
+} from "@mui/material";
+
 const EditarCategoria = () => {
   const { idCategoria } = useParams(); // id  da URL
   const navigate = useNavigate(); // redirecionar após a edição
@@ -64,17 +73,77 @@ const EditarCategoria = () => {
     })
   }
 
-  return (
-    <div>
-      <h1>Editar Categoria</h1>
-      <div>
-        <label>Nome da Categoria</label>
-        <input type="text" value={categoria} onChange={(e) => setCategoria(e.target.value)} />
-      </div>
-      <div>
-        <button onClick={editarCategoria}>Salvar Alterações</button>
-      </div>
-    </div>
+return (
+    <Box sx={{ padding: 3 }}>
+      <Paper
+        elevation={3}
+        sx={{
+          p: 3,
+          margin: "0 auto",
+          bgcolor: '#333',
+          color: '#fff',
+          borderRadius: 2,
+          maxWidth: 400,
+        }}
+      >
+        <Typography
+          variant="h4"
+          gutterBottom
+          align="center"
+          sx={{
+            fontSize: "36px",
+            fontWeight: "bold",
+            color: "#fff",
+          }}
+        >
+          Editar Categoria
+        </Typography>
+
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <TextField
+            label="Nome da Categoria"
+            variant="outlined"
+            fullWidth
+            value={categoria}
+            onChange={(e) => setCategoria(e.target.value)}
+            sx={{
+              backgroundColor: "#555",
+              "& .MuiInputLabel-root": {
+                color: "#fff"
+              },
+              "& .MuiInputBase-input": {
+                color: "#fff"
+              },
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "#777"
+                },
+                "&:hover fieldset": {
+                  borderColor: "#fff"
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "#fff"
+                }
+              }
+            }}
+          />
+          <Button
+            variant="contained"
+            onClick={editarCategoria}
+            sx={{
+              backgroundColor: "#1976d2",
+              color: "#fff",
+              fontWeight: "bold",
+              "&:hover": {
+                backgroundColor: "#115293",
+              }
+            }}
+          >
+            Salvar Alterações
+          </Button>
+        </Box>
+      </Paper>
+    </Box>
   );
 };
 

@@ -1,7 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate, Form } from "react-router-dom"; // pegar o id do prodto da URL
-import { Radio, RadioGroup, FormControlLabel } from "@mui/material";
+
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Paper,
+} from "@mui/material";
+
 
 const EditarProduto = () => {
   const { idProduto } = useParams(); // id  da URL
@@ -78,7 +91,7 @@ const EditarProduto = () => {
       }
       if (retorno.status === 200) {
         alert("Produto editado com sucesso");
-        navigate("/produtos"); // volta para lista de produtos
+        navigate("/listarProduto"); // volta para lista de produtos
       }
     });
   };
@@ -101,40 +114,137 @@ const EditarProduto = () => {
     });
   };
 
-  return (
-    <div>
-      <h1>Editar Produto</h1>
-      <div>
-        <label>Nome do Produto</label>
-        <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} />
-      </div>
-      <div>
-        <label>Quantidade</label>
-        <input type="number" value={quantidade} onChange={(e) => setQuantidade(e.target.value)} />
-      </div>
-      <div>
-        <label>Preço</label>
-        <input type="number" value={preco} onChange={(e) => setPreco(e.target.value)} />
-      </div>
+return (
+    <Box sx={{ padding: 3 }}>
+      <Paper
+        elevation={3}
+        sx={{
+          p: 3,
+          margin: "0 auto",
+          bgcolor: '#333',
+          color: '#fff',
+          borderRadius: 2,
+          maxWidth: 600,
+        }}
+      >
+        <Typography
+          variant="h4"
+          gutterBottom
+          align="center"
+          sx={{
+            fontSize: "36px",
+            fontWeight: "bold",
+            color: "#fff",
+          }}
+        >
+          Editar Produto
+        </Typography>
 
-      <RadioGroup value={categoria} onChange={(e) => setCategoria(e.target.value)}>
-        {categorias.map((cat) => (
-          <FormControlLabel key={cat._id} value={cat.nome} control={<Radio />} label={cat.nome} />
-        ))}
-      </RadioGroup>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          {[
+            { label: "Nome do Produto", value: nome, onChange: setNome },
+            { label: "Quantidade", value: quantidade, onChange: setQuantidade, type: "number" },
+            { label: "Preço", value: preco, onChange: setPreco, type: "number" },
+            { label: "Descrição", value: descricao, onChange: setDescricao, type: "textarea" },
+            { label: "URL da Imagem", value: imagem, onChange: setImagem, type: "textarea" },
+          ].map((field, index) => (
+            <TextField
+              key={index}
+              label={field.label}
+              value={field.value}
+              onChange={(e) => field.onChange(e.target.value)}
+              type={field.type || "text"}
+              variant="outlined"
+              fullWidth
+              InputProps={{
+                sx: {
+                  color: '#fff',
+                },
+              }}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  backgroundColor: '#555',
+                },
+                '& .MuiInputLabel-root': {
+                  color: '#fff',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#777',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#fff',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#fff',
+                },
+              }}
+            />
+          ))}
+        </Box>
 
-      <div>
-        <label>Descrição</label>
-        <textarea value={descricao} onChange={(e) => setDescricao(e.target.value)} />
-      </div>
-      <div>
-        <label>URL da imagem</label>
-        <textarea value={imagem} onChange={(e) => setImagem(e.target.value)} />
-      </div>
-      <div>
-        <button onClick={editarProduto}>Salvar Alterações</button>
-      </div>
-    </div>
+        <FormControl
+          component="fieldset"
+          sx={{
+            mt: 4,
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+            width: "100%",
+            textAlign: "center",
+          }}
+        >
+          <FormLabel
+            component="legend"
+            sx={{
+              fontSize: "1.25rem",
+              fontWeight: "bold",
+              color: '#fff'
+            }}
+          >
+            Categoria
+          </FormLabel>
+          <RadioGroup
+            row
+            value={categoria}
+            onChange={(e) => setCategoria(e.target.value)}
+            sx={{
+              justifyContent: "center",
+              width: "100%",
+            }}
+          >
+            {categorias.map((cat) => (
+              <FormControlLabel
+                key={cat._id}
+                value={cat.nome}
+                control={<Radio sx={{ color: '#fff' }} />}
+                label={cat.nome}
+                sx={{ marginRight: "16px", color: '#fff' }}
+              />
+            ))}
+          </RadioGroup>
+        </FormControl>
+
+        <Button
+          variant="contained"
+          sx={{
+            display: "block",
+            mt: 3,
+            py: 1.5,
+            mx: "auto",
+            width: "100%",
+            backgroundColor: '#1976d2',
+            color: '#fff',
+            fontWeight: 'bold',
+            '&:hover': {
+              backgroundColor: '#1565c0',
+            },
+          }}
+          onClick={editarProduto}
+        >
+          Salvar Alterações
+        </Button>
+      </Paper>
+    </Box>
   );
 };
 

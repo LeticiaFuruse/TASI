@@ -73,7 +73,7 @@ const Produtos = () => {
   };
 
 return (
-  <Box sx={{ p: 3 }}>
+  <Box sx={{ padding: 3 }}>
     <Paper
       elevation={3}
       sx={{
@@ -81,8 +81,8 @@ return (
         margin: "0 auto",
         bgcolor: '#333',
         color: '#fff',
-        width: '100%',
-        maxWidth: 600,
+        borderRadius: 2,
+        maxWidth: 600, // Tamanho ajustado conforme a largura da tela Categoria
       }}
     >
       <Typography
@@ -98,105 +98,45 @@ return (
         Registrar Produto
       </Typography>
 
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 2,
-          width: "100%",
-        }}
-      >
-        <TextField
-          label="Nome do produto"
-          variant="outlined"
-          onChange={(e) => setNomeProduto(e.target.value)}
-          fullWidth
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              backgroundColor: '#555',
-            },
-            '& .MuiInputLabel-root': {
-              color: '#fff',
-            },
-            '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#777',
-            },
-          }}
-        />
-
-        <TextField
-          type="number"
-          label="Quantidade"
-          variant="outlined"
-          onChange={(e) => setQuantidadeProduto(e.target.value)}
-          fullWidth
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              backgroundColor: '#555',
-            },
-            '& .MuiInputLabel-root': {
-              color: '#fff',
-            },
-            '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#777',
-            },
-          }}
-        />
-
-        <TextField
-          type="number"
-          label="Preço do produto"
-          variant="outlined"
-          onChange={(e) => setPrecoProduto(e.target.value)}
-          fullWidth
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              backgroundColor: '#555',
-            },
-            '& .MuiInputLabel-root': {
-              color: '#fff',
-            },
-            '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#777',
-            },
-          }}
-        />
-
-        <TextField
-          label="Descrição"
-          variant="outlined"
-          onChange={(e) => setDescricao(e.target.value)}
-          fullWidth
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              backgroundColor: '#555',
-            },
-            '& .MuiInputLabel-root': {
-              color: '#fff',
-            },
-            '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#777',
-            },
-          }}
-        />
-
-        <TextField
-          label="URL da imagem"
-          variant="outlined"
-          onChange={(e) => setImagem(e.target.value)}
-          fullWidth
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              backgroundColor: '#555',
-            },
-            '& .MuiInputLabel-root': {
-              color: '#fff',
-            },
-            '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#777',
-            },
-          }}
-        />
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        {[ 
+          { label: "Nome do produto", onChange: setNomeProduto },
+          { label: "Quantidade", type: "number", onChange: setQuantidadeProduto },
+          { label: "Preço do produto", type: "number", onChange: setPrecoProduto },
+          { label: "Descrição", onChange: setDescricao },
+          { label: "URL da imagem", onChange: setImagem }
+        ].map((field, index) => (
+          <TextField
+            key={index}
+            label={field.label}
+            type={field.type || "text"}
+            variant="outlined"
+            fullWidth
+            onChange={(e) => field.onChange(e.target.value)}
+            InputProps={{
+              sx: {
+                color: '#fff', // Texto digitado branco
+              },
+            }}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                backgroundColor: '#555',
+              },
+              '& .MuiInputLabel-root': {
+                color: '#fff',
+              },
+              '& .MuiOutlinedInput-notchedOutline': {
+                borderColor: '#777',
+              },
+              '&:hover .MuiOutlinedInput-notchedOutline': {
+                borderColor: '#fff',
+              },
+              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: '#fff',
+              },
+            }}
+          />
+        ))}
       </Box>
 
       <FormControl
@@ -248,10 +188,12 @@ return (
           mt: 3,
           py: 1.5,
           mx: "auto",
-          width: "200px",
-          backgroundColor: '#444',
+          width: "100%", // Ocupa toda a largura disponível
+          backgroundColor: '#1976d2', // Azul padrão
+          color: '#fff',
+          fontWeight: 'bold',
           '&:hover': {
-            backgroundColor: '#666',
+            backgroundColor: '#1565c0',
           },
         }}
         onClick={registroNovoProduto}
@@ -261,6 +203,8 @@ return (
     </Paper>
   </Box>
 );
+
+
 
 };
 

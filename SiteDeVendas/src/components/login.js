@@ -36,85 +36,97 @@ const Login = () => {
     })
   }
 
-  return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      minHeight="100vh"
-      bgcolor="#f5f5f5"
+return (
+  <Box sx={{ padding: 3 }}>
+    <Paper
+      elevation={3}
+      sx={{
+        p: 3,
+        margin: "0 auto",
+        bgcolor: "#333",
+        color: "#fff",
+        borderRadius: 2,
+        maxWidth: 400,
+      }}
     >
-      <Paper
-        elevation={3}
+      <Typography
+        variant="h4"
+        gutterBottom
+        align="center"
         sx={{
-          p: 4,
-          width: 350,
-          borderRadius: 3,
-          bgcolor: '#333', // Cor de fundo do Paper (preto fosco)
-          color: '#fff', // Cor do texto
+          fontSize: "36px",
+          fontWeight: "bold",
+          color: "#fff",
         }}
       >
-        <Typography variant="h5" mb={3} textAlign="center" color="#fff">
-          Faça seu login
-        </Typography>
+        Faça seu login
+      </Typography>
 
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
         <TextField
-          fullWidth
           label="Usuário"
           variant="outlined"
-          margin="normal"
+          fullWidth
           onChange={(e) => setUsuario(e.target.value)}
+          InputProps={{
+            sx: {
+              color: "#fff", // Cor do texto digitado
+            },
+          }}
           sx={{
-            '& .MuiOutlinedInput-root': {
-              backgroundColor: '#555', // Cor de fundo do input (cinza escuro)
-            },
-            '& .MuiInputLabel-root': {
-              color: '#fff', // Cor do label (branco)
-            },
-            '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#777', // Cor da borda (cinza claro)
+            backgroundColor: "#555",
+            "& .MuiInputLabel-root": { color: "#fff" },
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": { borderColor: "#777" },
+              "&:hover fieldset": { borderColor: "#fff" },
+              "&.Mui-focused fieldset": { borderColor: "#fff" },
             },
           }}
         />
 
         <TextField
-          fullWidth
           label="Senha"
           type="password"
           variant="outlined"
-          margin="normal"
+          fullWidth
           onChange={(e) => setSenha(e.target.value)}
+          InputProps={{
+            sx: {
+              color: "#fff",
+            },
+          }}
           sx={{
-            '& .MuiOutlinedInput-root': {
-              backgroundColor: '#555', // Cor de fundo do input (cinza escuro)
-            },
-            '& .MuiInputLabel-root': {
-              color: '#fff', // Cor do label (branco)
-            },
-            '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#777', // Cor da borda (cinza claro)
+            backgroundColor: "#555",
+            "& .MuiInputLabel-root": { color: "#fff" },
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": { borderColor: "#777" },
+              "&:hover fieldset": { borderColor: "#fff" },
+              "&.Mui-focused fieldset": { borderColor: "#fff" },
             },
           }}
         />
 
         <Button
           variant="contained"
-          fullWidth
+          onClick={validaUsuario}
           sx={{
-            mt: 3,
-            py: 1.5,
-            backgroundColor: '#444', // Cor do botão (cinza mais escuro)
-            '&:hover': {
-              backgroundColor: '#666', // Cor ao passar o mouse (cinza claro)
+            backgroundColor: "#1976d2", // azul padrão
+            color: "#fff",
+            fontWeight: "bold",
+            "&:hover": {
+              backgroundColor: "#1565c0",
             },
           }}
-          onClick={validaUsuario}
         >
           Logar
         </Button>
-      </Paper>
-    </Box>
-  )
+      </Box>
+    </Paper>
+  </Box>
+);
+
+
+
 
 }
 
