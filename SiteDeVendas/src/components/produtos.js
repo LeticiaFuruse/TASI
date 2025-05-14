@@ -6,12 +6,12 @@ import {
   TextField,
   Button,
   Typography,
-  Paper,
   FormControl,
   FormLabel,
   RadioGroup,
   FormControlLabel,
   Radio,
+  Paper,
 } from "@mui/material";
 
 const Produtos = () => {
@@ -72,67 +72,196 @@ const Produtos = () => {
     });
   };
 
-  return (
-    <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh" bgcolor="#f5f5f5">
-      <Paper elevation={3} sx={{ p: 4, width: "100%", maxWidth: 800, borderRadius: 3 }}>
-        <Typography variant="h5" mb={3} textAlign="center">
-          Registrar Produto
-        </Typography>
+return (
+  <Box sx={{ p: 3 }}>
+    <Paper
+      elevation={3}
+      sx={{
+        p: 3,
+        margin: "0 auto",
+        bgcolor: '#333',
+        color: '#fff',
+        width: '100%',
+        maxWidth: 600,
+      }}
+    >
+      <Typography
+        variant="h4"
+        gutterBottom
+        align="center"
+        sx={{
+          fontSize: "36px",
+          fontWeight: "bold",
+          color: "#fff",
+        }}
+      >
+        Registrar Produto
+      </Typography>
 
-        <Box display="flex" flexWrap="wrap" gap={2}>
-          <TextField
-            label="Nome do produto"
-            variant="outlined"
-            sx={{ width: "calc(50% - 8px)" }}
-            onChange={(e) => setNomeProduto(e.target.value)}
-          />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+          width: "100%",
+        }}
+      >
+        <TextField
+          label="Nome do produto"
+          variant="outlined"
+          onChange={(e) => setNomeProduto(e.target.value)}
+          fullWidth
+          sx={{
+            '& .MuiOutlinedInput-root': {
+              backgroundColor: '#555',
+            },
+            '& .MuiInputLabel-root': {
+              color: '#fff',
+            },
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#777',
+            },
+          }}
+        />
 
-          <TextField
-            type="number"
-            label="Quantidade"
-            variant="outlined"
-            sx={{ width: "calc(50% - 8px)" }}
-            onChange={(e) => setQuantidadeProduto(e.target.value)}
-          />
+        <TextField
+          type="number"
+          label="Quantidade"
+          variant="outlined"
+          onChange={(e) => setQuantidadeProduto(e.target.value)}
+          fullWidth
+          sx={{
+            '& .MuiOutlinedInput-root': {
+              backgroundColor: '#555',
+            },
+            '& .MuiInputLabel-root': {
+              color: '#fff',
+            },
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#777',
+            },
+          }}
+        />
 
-          <TextField
-            type="number"
-            label="Preço do produto"
-            variant="outlined"
-            sx={{ width: "calc(50% - 8px)" }}
-            onChange={(e) => setPrecoProduto(e.target.value)}
-          />
+        <TextField
+          type="number"
+          label="Preço do produto"
+          variant="outlined"
+          onChange={(e) => setPrecoProduto(e.target.value)}
+          fullWidth
+          sx={{
+            '& .MuiOutlinedInput-root': {
+              backgroundColor: '#555',
+            },
+            '& .MuiInputLabel-root': {
+              color: '#fff',
+            },
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#777',
+            },
+          }}
+        />
 
-          <TextField
-            label="Descrição"
-            variant="outlined"
-            sx={{ width: "calc(50% - 8px)" }}
-            onChange={(e) => setDescricao(e.target.value)}
-          />
+        <TextField
+          label="Descrição"
+          variant="outlined"
+          onChange={(e) => setDescricao(e.target.value)}
+          fullWidth
+          sx={{
+            '& .MuiOutlinedInput-root': {
+              backgroundColor: '#555',
+            },
+            '& .MuiInputLabel-root': {
+              color: '#fff',
+            },
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#777',
+            },
+          }}
+        />
 
-          <TextField
-            label="URL da imagem"
-            variant="outlined"
-            sx={{ width: "calc(50% - 8px)" }}
-            onChange={(e) => setImagem(e.target.value)}
-          />
-        </Box>
+        <TextField
+          label="URL da imagem"
+          variant="outlined"
+          onChange={(e) => setImagem(e.target.value)}
+          fullWidth
+          sx={{
+            '& .MuiOutlinedInput-root': {
+              backgroundColor: '#555',
+            },
+            '& .MuiInputLabel-root': {
+              color: '#fff',
+            },
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#777',
+            },
+          }}
+        />
+      </Box>
 
-        <FormControl component="fieldset" sx={{ mt: 3 }}>
-          <FormLabel component="legend">Categoria</FormLabel>
-          <RadioGroup row value={categoria} onChange={(e) => setCategoria(e.target.value)}>
-            {categorias.map((cat, i) => (
-              <FormControlLabel key={i} value={cat.nome} control={<Radio />} label={cat.nome} />
-            ))}
-          </RadioGroup>
-        </FormControl>
+      <FormControl
+        component="fieldset"
+        sx={{
+          mt: 4,
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          width: "100%",
+          textAlign: "center",
+        }}
+      >
+        <FormLabel
+          component="legend"
+          sx={{
+            fontSize: "1.25rem",
+            fontWeight: "bold",
+            color: '#fff'
+          }}
+        >
+          Categoria
+        </FormLabel>
+        <RadioGroup
+          row
+          value={categoria}
+          onChange={(e) => setCategoria(e.target.value)}
+          sx={{
+            justifyContent: "center",
+            width: "100%",
+          }}
+        >
+          {categorias.map((cat, i) => (
+            <FormControlLabel
+              key={i}
+              value={cat.nome}
+              control={<Radio sx={{ color: '#fff' }} />}
+              label={cat.nome}
+              sx={{ marginRight: "16px", color: '#fff' }}
+            />
+          ))}
+        </RadioGroup>
+      </FormControl>
 
-        <Button variant="contained" fullWidth sx={{ mt: 3, py: 1.5 }} onClick={registroNovoProduto}>
-          Registrar
-        </Button>
-      </Paper>
-    </Box>
-  );
+      <Button
+        variant="contained"
+        sx={{
+          display: "block",
+          mt: 3,
+          py: 1.5,
+          mx: "auto",
+          width: "200px",
+          backgroundColor: '#444',
+          '&:hover': {
+            backgroundColor: '#666',
+          },
+        }}
+        onClick={registroNovoProduto}
+      >
+        Registrar
+      </Button>
+    </Paper>
+  </Box>
+);
+
 };
 
 export default Produtos;

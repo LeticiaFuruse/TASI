@@ -1,6 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+import {
+  Box,
+  Paper,
+  Typography,
+  TextField,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  Button,
+  Card,
+  CardContent,
+  CardMedia
+} from "@mui/material";
+
 const Venda = () => {
     var [nomeCliente, setNomeCliente] = useState('')
     var [data, setData] = useState('')
@@ -58,31 +72,107 @@ const Venda = () => {
             }
         })
     }
-    return (
-        <div>
-            <h1>Vendas</h1>
-            <input type="text" placeholder="Nome do cliente" onChange={(e) => setNomeCliente(e.target.value)} />
-            <input type="date" onChange={(e) => setData(e.target.value)} />
-            {produtos.map((produto, indice) => (
-                <div key={indice}>
-                    <img width={80} src={produto.imagem} alt={produto.nome} />
-                    <h2>{produto.nome}</h2>
-                    <h2>{produto.quantidade}</h2>
-                    <h2>{produto.preço}</h2>
-                    
-                    <input type="checkbox" onChange={(e) => {
-                        if(e.target.checked){
-                            setProdutosVendidos([...produtosVendidos, produto])
-                        }else{
-                            setProdutosVendidos(produtosVendidos.filter(p=>p._id!==produto._id))
-                        }
-                            
-                    }}/>
-                </div>
-            ))}
-            <input type="button" value="Concluir venda" onClick={() => criarVenda()} />
-        </div>
-    )
+return (
+    <Box sx={{ p: 3 }}>
+      <Paper
+        elevation={3}
+        sx={{
+          p: 3,
+          bgcolor: "#2c2c2c",
+          color: "#fff",
+          maxWidth: 900,
+          margin: "0 auto"
+        }}
+      >
+        <Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: "bold" }}>
+          Registrar Venda
+        </Typography>
+
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 2 }}>
+          <TextField
+            label="Nome do Cliente"
+            variant="outlined"
+            fullWidth
+            onChange={(e) => setNomeCliente(e.target.value)}
+            InputProps={{ sx: { backgroundColor: "#555", color: "#fff" } }}
+            InputLabelProps={{ sx: { color: "#fff" } }}
+          />
+          <TextField
+            type="date"
+            variant="outlined"
+            fullWidth
+            onChange={(e) => setData(e.target.value)}
+            InputProps={{ sx: { backgroundColor: "#555", color: "#fff" } }}
+            InputLabelProps={{ shrink: true, sx: { color: "#fff" } }}
+          />
+        </Box>
+
+        <Typography variant="h6" sx={{ mt: 4, mb: 2 }}>
+          Produtos disponíveis
+        </Typography>
+
+        <FormGroup>
+          {produtos.map((produto, indice) => (
+            <Card
+              key={indice}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                bgcolor: "#444",
+                color: "#fff",
+                mb: 2,
+                p: 1
+              }}
+            >
+              <CardMedia
+                component="img"
+                image={produto.imagem}
+                alt={produto.nome}
+                sx={{ width: 80, height: 80, objectFit: "cover", borderRadius: 1, mr: 2 }}
+              />
+              <CardContent sx={{ flexGrow: 1 }}>
+                <Typography variant="subtitle1">{produto.nome}</Typography>
+                <Typography variant="body2">Quantidade: {produto.quantidade}</Typography>
+                <Typography variant="body2">Preço: R$ {produto.preco}</Typography>
+              </CardContent>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={produtosVendidos.some((p) => p._id === produto._id)}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setProdutosVendidos([...produtosVendidos, produto]);
+                      } else {
+                        setProdutosVendidos(
+                          produtosVendidos.filter((p) => p._id !== produto._id)
+                        );
+                      }
+                    }}
+                    sx={{ color: "#fff" }}
+                  />
+                }
+                label="Selecionar"
+              />
+            </Card>
+          ))}
+        </FormGroup>
+
+        <Button
+          variant="contained"
+          fullWidth
+          sx={{
+            mt: 3,
+            backgroundColor: "#555",
+            "&:hover": { backgroundColor: "#777" },
+            py: 1.5
+          }}
+          onClick={criarVenda}
+        >
+          Concluir Venda
+        </Button>
+      </Paper>
+    </Box>
+  );
 }
 
 export default Venda

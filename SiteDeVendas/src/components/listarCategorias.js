@@ -4,6 +4,21 @@ import {
     Link
 } from 'react-router-dom';
 
+import {
+  Box,
+  Typography,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  IconButton,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+
 const ListarCategorias = () => {
     var [categorias, setCategorias] = useState([])
 
@@ -58,35 +73,85 @@ const ListarCategorias = () => {
     })
   }
 
-    return (
-        <div>
-            <h1>Categorias</h1>
+return (
+  <Box sx={{ p: 3 }}>
+    <Typography
+      variant="h4"
+      gutterBottom
+      align="center"
+      sx={{ fontSize: "36px", fontWeight: "bold", color: "#333333" }}
+    >
+      Categorias
+    </Typography>
 
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>Usuário</th>
-                        <th>Nome da categoria</th>
-                        <th>Editar</th>
-                        <th>Excluir</th>
-                    </tr>
-                </thead>
-                <tbody>
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="Categorias Table">
+        <TableHead>
+          <TableRow>
+            <TableCell
+              sx={{
+                fontSize: "18px",
+                backgroundColor: "#333333",
+                color: "white",
+                borderRight: "1px solid #ddd", // Linha entre as colunas
+              }}
+            >
+              Usuário
+            </TableCell>
+            <TableCell
+              sx={{
+                fontSize: "18px",
+                backgroundColor: "#333333",
+                color: "white",
+                borderRight: "1px solid #ddd", // Linha entre as colunas
+              }}
+            >
+              Nome da Categoria
+            </TableCell>
+            <TableCell
+              sx={{
+                fontSize: "18px",
+                backgroundColor: "#333333",
+                color: "white",
+              }}
+            >
+              Ações
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {categorias.map((categoria) => (
+            <TableRow key={categoria._id}>
+              <TableCell sx={{ borderBottom: "1px solid #ddd", borderRight: "1px solid #ddd" }}>
+                {categoria.usuario}
+              </TableCell>
+              <TableCell sx={{ borderBottom: "1px solid #ddd", borderRight: "1px solid #ddd" }}>
+                {categoria.nome}
+              </TableCell>
+              <TableCell sx={{ borderBottom: "1px solid #ddd" }}>
+                <Box display="flex" justifyContent="space-around">
+                  <Link to={`/editarCategoria/${categoria._id}`}>
+                    <IconButton color="primary">
+                      <EditIcon />
+                    </IconButton>
+                  </Link>
+                  <IconButton
+                    color="error"
+                    onClick={() => excluirCategoria(categoria._id)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </Box>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  </Box>
+);
 
-                    {/*  percorre array de produtos e cria uma linha para cada produto */}
-                    {categorias.map((categoria, indice) => (
-                        <tr value={indice}>
-                            <td>{categoria.usuario}</td>
-                            <td>{categoria.nome}</td>
-                            
-                                <td><Link to={`/editarCategoria/${categoria._id}`}>Editar</Link></td>
-                                <td><button onClick={() =>excluirCategoria(categoria._id)}>Excluir</button></td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    )
+
 
 }
 

@@ -8,6 +8,8 @@ import {
     Outlet,
     Link
 } from 'react-router-dom';
+import { CssBaseline } from '@mui/material';
+
 
 //puxa os arquivos que eu crio
 import Dashboard from './components/dashboard';
@@ -23,6 +25,7 @@ import ListarVendas from './components/listarVendas';
 import EditarProduto from './components/editarProduto';
 import EditarCategoria from './components/editarCategoria';
 import LimparTabelas from './components/limparTabelas';
+import Menu from './components/menu';
 
 const Middleware = () => {
     var logado = localStorage.getItem("ALUNO_ITE");
@@ -37,32 +40,20 @@ const Middleware = () => {
 const App = () => {
     return (
         <BrowserRouter>
+        <CssBaseline />
             <div>
-                <nav className="menu" style={{ display: "flex", gap: "10px" }}>
-
-                    {/* aparecer na tela */}
-                    <Link to="/">Principal</Link>
-                    <Link to="/pessoas">Pessoas</Link>
-                    <Link to="/registro">Registro</Link>
-                    <Link to="/login">Login</Link>
-                    <Link to="/produtos">Produtos</Link>
-                    <Link to="/listarProduto">Listar Produto</Link>
-                    <Link to="/categorias">Categoria</Link>
-                    <Link to="/listarCategoria">Listar Categoria</Link>
-                    <Link to="/Venda">Venda</Link>
-                    <Link to="/listarVendas">Listar vendas</Link>
-                    <Link to="/limparTabelas">Limpar</Link>
-                </nav>
+                <Menu /> {/* Toolbar visível em todas as páginas */}
 
                 <Routes>
+                    {/* Rotas públicas */}
                     <Route path="/login" element={<Login />} />
                     <Route path="/registro" element={<Registro />} />
 
+                    {/* Rotas protegidas */}
                     <Route element={<Middleware />}>
-                    {/* rotas seguras = depois de logar */}
                         <Route path="/" element={<Dashboard />} />
-                        <Route path="/produtos" element={<Produtos />} />
                         <Route path="/pessoas" element={<Pessoas />} />
+                        <Route path="/produtos" element={<Produtos />} />
                         <Route path="/listarProduto" element={<ListarProduto />} />
                         <Route path="/categorias" element={<Categorias />} />
                         <Route path="/listarCategoria" element={<ListarCategoria />} />

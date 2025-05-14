@@ -1,6 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import EditarProduto from "./editarProduto";
+
+import {
+  Box,
+  Typography,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  IconButton,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+
 
 const ListarVendas = () => {
     var [vendas, setVendas] = useState([])
@@ -58,51 +72,107 @@ const excluirVenda = async (id) => {
 
 
 
-    return (
-        <div>
-            <h1>Vendas</h1>
+return (
+    <Box sx={{ p: 3 }}>
+      <Typography
+        variant="h4"
+        gutterBottom
+        align="center"
+        sx={{ fontSize: "36px", fontWeight: "bold", color: "#333333" }}
+      >
+        Vendas
+      </Typography>
 
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>Usuário</th>
-                        <th>Nome do cliente</th>
-                        <th>Data</th>
-                        <th>Produtos</th>
-                        <th>Editar</th>
-                        <th>Excluir</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    {/*  percorre array de produtos e cria uma linha para cada produto */}
-                    {vendas.map((venda, indice) => (
-                        <tr key={indice}>
-                            <td>{venda.usuario}</td>
-                            <td>{venda.nomeCliente}</td>
-                            <td>{venda.data}</td>
-                            <td>{venda.produtos.map((produto, indice_prod) => (
-                                <div key={indice_prod}>
-                                    <label>{produto.nome}-</label>
-                                    <label>{produto.quantidade}-</label>
-                                    <label>{produto.preco}</label>
-                                </div>
-                            ))}</td>
-                            <td>{venda.data}</td>
-                            <td><button onClick={() =>excluirVenda(venda._id)}>Excluir</button></td>
-                            
-
-
-                            
-
-                            {/* <td><Link to="/editarProduto">Editar</Link></td>
-                                <td><Link to="/excluirProduto">Excluir</Link></td> */}
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    )
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="Vendas Table">
+          <TableHead>
+            <TableRow>
+              <TableCell
+                sx={{
+                  fontSize: "18px",
+                  backgroundColor: "#333333",
+                  color: "white",
+                  borderRight: "1px solid #ddd",
+                }}
+              >
+                Usuário
+              </TableCell>
+              <TableCell
+                sx={{
+                  fontSize: "18px",
+                  backgroundColor: "#333333",
+                  color: "white",
+                  borderRight: "1px solid #ddd",
+                }}
+              >
+                Nome do Cliente
+              </TableCell>
+              <TableCell
+                sx={{
+                  fontSize: "18px",
+                  backgroundColor: "#333333",
+                  color: "white",
+                  borderRight: "1px solid #ddd",
+                }}
+              >
+                Data
+              </TableCell>
+              <TableCell
+                sx={{
+                  fontSize: "18px",
+                  backgroundColor: "#333333",
+                  color: "white",
+                  borderRight: "1px solid #ddd",
+                }}
+              >
+                Produtos
+              </TableCell>
+              <TableCell
+                sx={{
+                  fontSize: "18px",
+                  backgroundColor: "#333333",
+                  color: "white",
+                }}
+              >
+                Ações
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {vendas.map((venda) => (
+              <TableRow key={venda._id}>
+                <TableCell sx={{ borderBottom: "1px solid #ddd", borderRight: "1px solid #ddd" }}>
+                  {venda.usuario}
+                </TableCell>
+                <TableCell sx={{ borderBottom: "1px solid #ddd", borderRight: "1px solid #ddd" }}>
+                  {venda.nomeCliente}
+                </TableCell>
+                <TableCell sx={{ borderBottom: "1px solid #ddd", borderRight: "1px solid #ddd" }}>
+                  {venda.data}
+                </TableCell>
+                <TableCell sx={{ borderBottom: "1px solid #ddd", borderRight: "1px solid #ddd" }}>
+                  {venda.produtos.map((produto, i) => (
+                    <div key={i}>
+                      <span>{produto.nome} - </span>
+                      <span>{produto.quantidade} - </span>
+                      <span>R${produto.preco}</span>
+                    </div>
+                  ))}
+                </TableCell>
+                <TableCell sx={{ borderBottom: "1px solid #ddd" }}>
+                  <Box display="flex" justifyContent="center">
+                    <IconButton color="error" onClick={() => excluirVenda(venda._id)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </Box>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
+  );
 
 }
 

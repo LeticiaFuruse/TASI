@@ -88,12 +88,13 @@ const ListarProduto = () => {
   };
 
   return (
+
     <Box sx={{ p: 3 }}>
       <Typography
         variant="h4"
         gutterBottom
         align="center"
-        sx={{ fontSize: "36px", fontWeight: "bold", color: "black" }}
+        sx={{ fontSize: "36px", fontWeight: "bold", color: "#333333" }}
       >
         Produtos
       </Typography>
@@ -102,45 +103,135 @@ const ListarProduto = () => {
         <Table sx={{ minWidth: 650 }} aria-label="Produtos Table">
           <TableHead>
             <TableRow>
-              <TableCell sx={{ fontSize: "18px", backgroundColor: "#1976d2", color: "white" }}>Usuário</TableCell>
-              <TableCell sx={{ fontSize: "18px", backgroundColor: "#1976d2", color: "white" }}>Nome</TableCell>
-              <TableCell sx={{ fontSize: "18px", backgroundColor: "#1976d2", color: "white" }}>Quantidade</TableCell>
-              <TableCell sx={{ fontSize: "18px", backgroundColor: "#1976d2", color: "white" }}>Preço</TableCell>
-              <TableCell sx={{ fontSize: "18px", backgroundColor: "#1976d2", color: "white" }}>Categoria</TableCell>
-              <TableCell sx={{ fontSize: "18px", backgroundColor: "#1976d2", color: "white" }}>Descrição</TableCell>
-              <TableCell sx={{ fontSize: "18px", backgroundColor: "#1976d2", color: "white" }}>Imagem</TableCell>
-              <TableCell sx={{ fontSize: "18px", backgroundColor: "#1976d2", color: "white" }}>Ações</TableCell>
+              <TableCell
+                sx={{
+                  fontSize: "18px",
+                  backgroundColor: "#333333",
+                  color: "white",
+                  borderRight: "1px solid #ddd", // Linha entre as colunas
+                }}
+              >
+                Usuário
+              </TableCell>
+              <TableCell
+                sx={{
+                  fontSize: "18px",
+                  backgroundColor: "#333333",
+                  color: "white",
+                  borderRight: "1px solid #ddd", // Linha entre as colunas
+                }}
+              >
+                Nome
+              </TableCell>
+              <TableCell
+                sx={{
+                  fontSize: "18px",
+                  backgroundColor: "#333333",
+                  color: "white",
+                  borderRight: "1px solid #ddd", // Linha entre as colunas
+                }}
+              >
+                Quantidade
+              </TableCell>
+              <TableCell
+                sx={{
+                  fontSize: "18px",
+                  backgroundColor: "#333333",
+                  color: "white",
+                  borderRight: "1px solid #ddd", // Linha entre as colunas
+                }}
+              >
+                Preço
+              </TableCell>
+              <TableCell
+                sx={{
+                  fontSize: "18px",
+                  backgroundColor: "#333333",
+                  color: "white",
+                  borderRight: "1px solid #ddd", // Linha entre as colunas
+                }}
+              >
+                Categoria
+              </TableCell>
+              <TableCell
+                sx={{
+                  fontSize: "18px",
+                  backgroundColor: "#333333",
+                  color: "white",
+                  borderRight: "1px solid #ddd", // Linha entre as colunas
+                }}
+              >
+                Descrição
+              </TableCell>
+              <TableCell
+                sx={{
+                  fontSize: "18px",
+                  backgroundColor: "#333333",
+                  color: "white",
+                  borderRight: "1px solid #ddd", // Linha entre as colunas
+                }}
+              >
+                Imagem
+              </TableCell>
+              <TableCell
+                sx={{
+                  fontSize: "18px",
+                  backgroundColor: "#333333",
+                  color: "white",
+                }}
+              >
+                Ações
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {produtos.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((prod) => (
-              <TableRow key={prod._id}>
-                <TableCell>{prod.usuario}</TableCell>
-                <TableCell>{prod.nome}</TableCell>
-                <TableCell>{prod.quantidade}</TableCell>
-                <TableCell>{prod.preco}</TableCell>
-                <TableCell>{prod.categoria}</TableCell>
-                <TableCell>{prod.descricao}</TableCell>
-                <TableCell>
-                  <img width={80} src={prod.imagem} alt="imagem" style={{ objectFit: "cover" }} />
-                </TableCell>
-                <TableCell>
-                  <Box display="flex" justifyContent="space-around">
-                    <Link to={`/editarProduto/${prod._id}`}>
-                      <IconButton color="primary">
-                        <EditIcon />
+            {produtos
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((prod) => (
+                <TableRow key={prod._id}>
+                  <TableCell sx={{ borderRight: "1px solid #ddd" }}>
+                    {prod.usuario}
+                  </TableCell>
+                  <TableCell sx={{ borderRight: "1px solid #ddd" }}>
+                    {prod.nome}
+                  </TableCell>
+                  <TableCell sx={{ borderRight: "1px solid #ddd" }}>
+                    {prod.quantidade}
+                  </TableCell>
+                  <TableCell sx={{ borderRight: "1px solid #ddd" }}>
+                    {prod.preco}
+                  </TableCell>
+                  <TableCell sx={{ borderRight: "1px solid #ddd" }}>
+                    {prod.categoria}
+                  </TableCell>
+                  <TableCell sx={{ borderRight: "1px solid #ddd" }}>
+                    {prod.descricao}
+                  </TableCell>
+                  <TableCell sx={{ borderRight: "1px solid #ddd" }}>
+                    <img
+                      width={80}
+                      src={prod.imagem}
+                      alt="imagem"
+                      style={{ objectFit: "cover" }}
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <Box display="flex" justifyContent="space-around">
+                      <Link to={`/editarProduto/${prod._id}`}>
+                        <IconButton color="primary">
+                          <EditIcon />
+                        </IconButton>
+                      </Link>
+                      <IconButton
+                        color="error"
+                        onClick={() => excluirProduto(prod._id)}
+                      >
+                        <DeleteIcon />
                       </IconButton>
-                    </Link>
-                    <IconButton
-                      color="error" // Aqui usamos a cor "error" que é vermelha
-                      onClick={() => excluirProduto(prod._id)}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </Box>
-                </TableCell>
-              </TableRow>
-            ))}
+                    </Box>
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
@@ -155,6 +246,7 @@ const ListarProduto = () => {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Box>
+
   );
 };
 
