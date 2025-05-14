@@ -92,7 +92,7 @@ const ListarProduto = () => {
               <td>{prod.categoria}</td>
               <td>{prod.descricao}</td>
               <td>
-                <img width={80} src={prod.imagem} alt={prod.nome} />
+                <img width={80} src={prod.imagem} alt={"imagem"} />
               </td>
               <td>
                 {/* pega o id do produto */}
