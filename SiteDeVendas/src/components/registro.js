@@ -1,6 +1,14 @@
 import React, {useState} from "react";
 import axios from "axios";
 
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Paper,
+} from "@mui/material";
+
 const Registro = () => {
     var [criarUsuario, setCriarUsuario] = useState('')
     var [senha, setSenha] = useState('')
@@ -30,14 +38,54 @@ const Registro = () => {
     }
 
     return(
-        <div>
-            <h1>Registre-se</h1>
+        <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      minHeight="100vh"
+      bgcolor="#f5f5f5"
+    >
+      <Paper elevation={3} sx={{ p: 4, width: 350, borderRadius: 3 }}>
+        <Typography variant="h5" mb={3} textAlign="center">
+          Registre-se
+        </Typography>
 
-            <input type="text" placeholder="Usuario" onChange={(e) => setCriarUsuario(e.target.value)}/>
-            <input type="password" placeholder="Senha" onChange={(e) => setSenha(e.target.value)}/>
-            <input type="password" placeholder="Confirmar Senha" onChange={(e) => setConfirmarSenha(e.target.value)}/>
-            <input type="button" value="Registrar" onClick={() => registroUsuario()}/>
-        </div>
+        <TextField
+          fullWidth
+          label="Usuário"
+          variant="outlined"
+          margin="normal"
+          onChange={(e) => setCriarUsuario(e.target.value)}
+        />
+
+        <TextField
+          fullWidth
+          label="Senha"
+          type="password"
+          variant="outlined"
+          margin="normal"
+          onChange={(e) => setSenha(e.target.value)}
+        />
+
+        <TextField
+          fullWidth
+          label="Confirmar Senha"
+          type="password"
+          variant="outlined"
+          margin="normal"
+          onChange={(e) => setConfirmarSenha(e.target.value)}
+        />
+
+        <Button
+          variant="contained"
+          fullWidth
+          sx={{ mt: 3, py: 1.5 }}
+          onClick={registroUsuario}
+        >
+          Registrar
+        </Button>
+      </Paper>
+    </Box>
     )
 }
 
