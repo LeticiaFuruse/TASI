@@ -32,6 +32,7 @@ const Login = () => {
       if (retorno.data.token) {
         alert("Logado com sucesso")
         localStorage.setItem("ALUNO_ITE", retorno.data.token)
+        localStorage.setItem("USUARIO", usuario)
       }
     })
   }

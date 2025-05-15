@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 
 const Produtos = () => {
+
   var [nome, setNomeProduto] = useState("");
   var [quantidade, setQuantidadeProduto] = useState("");
   var [preco, setPrecoProduto] = useState("");
@@ -48,7 +49,7 @@ const Produtos = () => {
 
   // conexão com o banco para a função para criar um novo produto
   const registroNovoProduto = async () => {
-    var url = "https://backend-completo.vercel.app/app/produtos";
+    var url = "https://backend-completo.vercel.app/app/produtos/";
     var dados = {
       nome: nome,
       quantidade: quantidade,

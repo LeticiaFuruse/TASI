@@ -23,6 +23,9 @@ import EditIcon from "@mui/icons-material/Edit";
 // componente que lista os produtos
 const ListarProduto = () => {
   // começa um array vazio
+
+  var usuario = localStorage.getItem("USUARIO");
+
   var [produtos, setProdutos] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -33,8 +36,9 @@ const ListarProduto = () => {
 
   // executar a função
   const listarProduto = async () => {
-    var url = "https://backend-completo.vercel.app/app/produtos";
+    var url = `https://backend-completo.vercel.app/app/produtos/${usuario}/`;
     var token = localStorage.getItem("ALUNO_ITE");
+    var token = localStorage.getItem("USUARIO");
 
     await axios.get(url, { headers: { Authorization: `Bearer ${token}` } }).then((retorno) => {
       console.log(retorno);
