@@ -21,6 +21,8 @@ const Venda = () => {
     var [produtos, setProdutos] = useState([])
     const [produtosVendidos, setProdutosVendidos] = useState([])
 
+    var usuario = localStorage.getItem("USUARIO");
+
 
     const criarVenda = async () => {
         var url = "https://backend-completo.vercel.app/app/venda"
@@ -53,8 +55,10 @@ const Venda = () => {
 
 
     const listarProduto = async () => {
-        var url = "https://backend-completo.vercel.app/app/produtos"
+        var url = `https://backend-completo.vercel.app/app/produtos/${usuario}/`;
         var token = localStorage.getItem("ALUNO_ITE")
+        var token = localStorage.getItem("USUARIO")
+        
         await axios.get(
             url,
             { headers: { Authorization: `Bearer ${token}` } }

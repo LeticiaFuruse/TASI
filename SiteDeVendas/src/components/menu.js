@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import  { useNavigate } from "react-router-dom";
-
+import { useNavigate, Link } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -12,17 +11,16 @@ import {
   ListItemButton,
   IconButton,
   Divider,
+  Box,
 } from "@mui/material";
-import { Link, Navigate } from "react-router-dom";
-import CloseIcon from "@mui/icons-material/Close"; // Ícone para fechar o menu lateral
-import MenuIcon from "@mui/icons-material/Menu"; // Ícone para abrir o menu (hambúrguer)
+import CloseIcon from "@mui/icons-material/Close";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const Menu = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
   const links = [
-    { path: "/pessoas", label: "Pessoas" },
     { path: "/registro", label: "Registro" },
     { path: "/login", label: "Login" },
   ];
@@ -51,15 +49,13 @@ const Menu = () => {
     localStorage.removeItem("USUARIO");
     navigate("/login");
 
-    setTimeout (() =>{
-      navigate("/login")
-    },750)
+    setTimeout(() => {
+      navigate("/login");
+    }, 750);
   };
-  
 
   return (
     <div>
-      {/* AppBar (topo do menu) */}
       <AppBar position="static" sx={{ backgroundColor: "#2c2c2c", mb: 4 }}>
         <Toolbar sx={{ flexWrap: "wrap", gap: 1 }}>
           <Button
@@ -69,29 +65,43 @@ const Menu = () => {
           >
             Menu
           </Button>
-          <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: "bold", color: "white", textAlign: "center" }}>
+          <Typography
+            variant="h6"
+            sx={{
+              flexGrow: 1,
+              fontWeight: "bold",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
             Sistema de Controle
           </Typography>
-          <Button component={Link} to="/" sx={{ color: "white", textTransform: "none" }}>
+          <Button
+            component={Link}
+            to="/"
+            sx={{ color: "white", textTransform: "none" }}
+          >
             Principal
           </Button>
         </Toolbar>
       </AppBar>
 
-      {/* Menu lateral (Drawer) */}
       <Drawer
         anchor="left"
         open={open}
         onClose={() => toggleDrawer(false)}
         sx={{
           "& .MuiDrawer-paper": {
-            backgroundColor: "#333", // Cor de fundo cinza escuro
-            color: "white", // Cor das letras
+            backgroundColor: "#333",
+            color: "white",
+            width: 320,
+            display: "flex",
+            flexDirection: "column",
+            height: "100%",
           },
         }}
       >
-        <div style={{ width: 250, height: "100%" }}>
-          {/* Botão de Fechar */}
+        <Box sx={{ width: 320, flexGrow: 1 }}>
           <IconButton
             onClick={() => toggleDrawer(false)}
             sx={{
@@ -103,96 +113,112 @@ const Menu = () => {
             <CloseIcon />
           </IconButton>
 
-          {/* Lista de links (Pessoas, Registro, Login) */}
-          <List sx={{ paddingTop: "40px" }}>
+          <List sx={{ paddingTop: "20px" }}>
             {links.map((item, index) => (
               <ListItem button key={index}>
-                <ListItemButton component={Link} to={item.path} sx={{ textTransform: "none", color: "white" }}>
+                <ListItemButton
+                  component={Link}
+                  to={item.path}
+                  sx={{ textTransform: "none", color: "white" }}
+                >
                   {item.label}
                 </ListItemButton>
               </ListItem>
             ))}
           </List>
 
-          <Divider sx={{ borderColor: "rgba(255, 255, 255, 0.3)", my: 1, borderWidth: 0.25 }} />
+          <Divider sx={{ borderColor: "rgba(255, 255, 255, 0.3)", my: 1 }} />
 
           <List>
             {linksProdutos.map((item, index) => (
               <ListItem button key={index}>
-                <ListItemButton component={Link} to={item.path} sx={{ textTransform: "none", color: "white" }}>
+                <ListItemButton
+                  component={Link}
+                  to={item.path}
+                  sx={{ textTransform: "none", color: "white" }}
+                >
                   {item.label}
                 </ListItemButton>
               </ListItem>
             ))}
           </List>
 
-          <Divider sx={{ borderColor: "rgba(255, 255, 255, 0.3)", my: 1, borderWidth: 0.25 }} />
+          <Divider sx={{ borderColor: "rgba(255, 255, 255, 0.3)", my: 1 }} />
 
           <List>
             {linksCategorias.map((item, index) => (
               <ListItem button key={index}>
-                <ListItemButton component={Link} to={item.path} sx={{ textTransform: "none", color: "white" }}>
+                <ListItemButton
+                  component={Link}
+                  to={item.path}
+                  sx={{ textTransform: "none", color: "white" }}
+                >
                   {item.label}
                 </ListItemButton>
               </ListItem>
             ))}
           </List>
 
-          <Divider sx={{ borderColor: "rgba(255, 255, 255, 0.3)", my: 1, borderWidth: 0.25 }} />
+          <Divider sx={{ borderColor: "rgba(255, 255, 255, 0.3)", my: 1 }} />
 
           <List>
             {linksVendas.map((item, index) => (
               <ListItem button key={index}>
-                <ListItemButton component={Link} to={item.path} sx={{ textTransform: "none", color: "white" }}>
+                <ListItemButton
+                  component={Link}
+                  to={item.path}
+                  sx={{ textTransform: "none", color: "white" }}
+                >
                   {item.label}
                 </ListItemButton>
               </ListItem>
             ))}
           </List>
 
-          <Divider sx={{ borderColor: "rgba(255, 255, 255, 0.3)", my: 1, borderWidth: 0.25 }} />
+          <Divider sx={{ borderColor: "rgba(255, 255, 255, 0.3)", my: 1 }} />
 
           <List>
             <ListItem button>
               <ListItemButton
-                sx={{
-                  textTransform: "none",
-                  color: "white",
-                  backgroundColor: "#ff4d4d",
-                  borderRadius: "20px",
-                  padding: "10px 20px",
-                  "&:hover": {
-                    backgroundColor: "#ff2a2a",
-                  },
-                }}
                 component={Link}
                 to="/limparTabelas"
+                sx={{ textTransform: "none", color: "white" }}
               >
                 Limpar
               </ListItemButton>
             </ListItem>
           </List>
+        </Box>
 
-          <List>
-            <ListItem button>
-              <ListItemButton
-                sx={{
-                  textTransform: "none",
-                  color: "white",
-                  backgroundColor: "#ff4d4d",
-                  borderRadius: "20px",
-                  padding: "10px 20px",
-                  "&:hover": {
-                    backgroundColor: "#ff2a2a",
-                  },
-                }}
-                component={Link} onClick={logout}
-              >
-                Sair
-              </ListItemButton>
-            </ListItem>
-          </List>
-        </div>
+        {/* Botão Sair fixado ao fim do Drawer */}
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            paddingBottom: 2,
+          }}
+        >
+          <ListItemButton
+            sx={{
+              width: "40%",
+              margin: "0 30px",
+              textTransform: "none",
+              color: "white",
+              backgroundColor: "#ff4d4d",
+              borderRadius: "12px",
+              padding: "6px 12px",
+              fontSize: "0.875rem",
+              justifyContent: "center",
+              "&:hover": {
+                backgroundColor: "#ff2a2a",
+              },
+            }}
+            onClick={logout}
+          >
+            Sair
+          </ListItemButton>
+        </Box>
       </Drawer>
     </div>
   );
