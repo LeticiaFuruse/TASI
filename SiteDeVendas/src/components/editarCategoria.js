@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom"; // pegar o id do prodto da URL
-
+import Menu from "./menu";
 
 import {
   Box,
@@ -9,6 +9,7 @@ import {
   Button,
   Typography,
   Paper,
+  CssBaseline,
 } from "@mui/material";
 
 const EditarCategoria = () => {
@@ -74,6 +75,8 @@ const EditarCategoria = () => {
   }
 
 return (
+  <CssBaseline>
+      <Menu /> {/* Toolbar ADMIN visível em todas as páginas */}
     <Box sx={{ padding: 3 }}>
       <Paper
         elevation={3}
@@ -144,6 +147,8 @@ return (
         </Box>
       </Paper>
     </Box>
+  </CssBaseline>
+
   );
 };
 

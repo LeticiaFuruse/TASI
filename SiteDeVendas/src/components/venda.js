@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import Menu from "./menu";
 import {
   Box,
   Paper,
@@ -12,7 +12,8 @@ import {
   Button,
   Card,
   CardContent,
-  CardMedia
+  CardMedia,
+  CssBaseline
 } from "@mui/material";
 
 const Venda = () => {
@@ -77,7 +78,9 @@ const Venda = () => {
         })
     }
 return (
-  <Box sx={{ p: 3 }}>
+  <CssBaseline>
+    <Menu /> {/* Toolbar ADMIN visível em todas as páginas */}
+      <Box sx={{ p: 3 }}>
     <Paper
       elevation={3}
       sx={{
@@ -198,6 +201,8 @@ return (
       </Button>
     </Paper>
   </Box>
+  </CssBaseline>
+
 );
 
 }

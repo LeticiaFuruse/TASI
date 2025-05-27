@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import Menu from "./menu";
 import {
   Box,
   TextField,
   Button,
   Typography,
   Paper,
+  CssBaseline,
 } from "@mui/material";
 
 const Registro = () => {
@@ -38,6 +39,9 @@ const Registro = () => {
   }
 
 return (
+
+  <CssBaseline>
+    <Menu /> {/* Toolbar ADMIN visível em todas as páginas */}
   <Box sx={{ padding: 3 }}>
     <Paper
       elevation={3}
@@ -148,6 +152,9 @@ return (
       </Box>
     </Paper>
   </Box>
+
+  </CssBaseline>
+
 );
 
 

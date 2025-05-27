@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { Button, Typography, Box, Paper } from "@mui/material";
-
+import { Button, Typography, Box, Paper, CssBaseline } from "@mui/material";
+import Menu from "./menu";
 const LimparTabelas = () => {
   const limparTabelas = async () => {
     var url = "https://backend-completo.vercel.app/app/limpar";
@@ -22,6 +22,8 @@ const LimparTabelas = () => {
   };
 
   return (
+    <CssBaseline>
+      <Menu /> {/* Toolbar ADMIN visível em todas as páginas */}
     <Box
       sx={{
         display: "flex",
@@ -29,6 +31,7 @@ const LimparTabelas = () => {
         padding: 2, // Adiciona um pequeno padding nas laterais
       }}
     >
+      
       <Paper
         sx={{
           padding: 4,
@@ -64,6 +67,8 @@ const LimparTabelas = () => {
         </Button>
       </Paper>
     </Box>
+    </CssBaseline>
+
   );
 };
 

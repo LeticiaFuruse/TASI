@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import Menu from "./menu";
 import {
   Box,
   Typography,
@@ -12,6 +12,7 @@ import {
   TableHead,
   TableRow,
   IconButton,
+  CssBaseline,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -73,6 +74,8 @@ const excluirVenda = async (id) => {
 
 
 return (
+  <CssBaseline>
+      <Menu /> {/* Toolbar ADMIN visível em todas as páginas */}
     <Box sx={{ p: 3 }}>
       <Typography
         variant="h4"
@@ -172,6 +175,8 @@ return (
         </Table>
       </TableContainer>
     </Box>
+  </CssBaseline>
+
   );
 
 }

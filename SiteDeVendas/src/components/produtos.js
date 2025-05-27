@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import Menu from "./menu";
 import {
   Box,
   TextField,
@@ -12,6 +12,7 @@ import {
   FormControlLabel,
   Radio,
   Paper,
+  CssBaseline,
 } from "@mui/material";
 
 const Produtos = () => {
@@ -74,7 +75,9 @@ const Produtos = () => {
   };
 
 return (
-  <Box sx={{ padding: 3 }}>
+  <CssBaseline>
+    <Menu /> {/* Toolbar ADMIN visível em todas as páginas */}
+    <Box sx={{ padding: 3 }}>
     <Paper
       elevation={3}
       sx={{
@@ -203,6 +206,8 @@ return (
       </Button>
     </Paper>
   </Box>
+  </CssBaseline>
+
 );
 
 

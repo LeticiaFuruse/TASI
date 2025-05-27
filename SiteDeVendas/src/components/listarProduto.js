@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import Menu from "./menu";
 import {
   Box,
   Typography,
@@ -15,6 +15,7 @@ import {
   TableRow,
   TablePagination,
   IconButton,
+  CssBaseline,
 } from "@mui/material";
 
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -92,7 +93,8 @@ const ListarProduto = () => {
   };
 
   return (
-
+  <CssBaseline>
+      <Menu /> {/* Toolbar ADMIN visível em todas as páginas */}
     <Box sx={{ p: 3 }}>
       <Typography
         variant="h4"
@@ -250,6 +252,8 @@ const ListarProduto = () => {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Box>
+  </CssBaseline>
+
 
   );
 };

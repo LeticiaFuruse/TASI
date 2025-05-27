@@ -25,7 +25,11 @@ import ListarVendas from './components/listarVendas';
 import EditarProduto from './components/editarProduto';
 import EditarCategoria from './components/editarCategoria';
 import LimparTabelas from './components/limparTabelas';
-import Menu from './components/menu';
+
+import Cliente from './components/cliente';
+
+
+
 
 const Middleware = () => {
     var logado = localStorage.getItem("ALUNO_ITE");
@@ -42,13 +46,16 @@ const App = () => {
         <BrowserRouter>
         <CssBaseline />
             <div>
-                <Menu /> {/* Toolbar visível em todas as páginas */}
-
+                    
+                    
                 <Routes>
                     {/* Rotas públicas */}
                     <Route path="/login" element={<Login />} />
                     <Route path="/registro" element={<Registro />} />
+                    <Route path="/cliente" element={<Cliente />} />
 
+
+                    
                     {/* Rotas protegidas */}
                     <Route element={<Middleware />}>
                         <Route path="/" element={<Dashboard />} />
