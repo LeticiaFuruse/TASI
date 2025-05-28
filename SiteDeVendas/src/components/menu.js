@@ -81,7 +81,7 @@ const Menu = () => {
             to="/"
             sx={{ color: "white", textTransform: "none" }}
           >
-            Principal
+            Loja Online
           </Button>
         </Toolbar>
       </AppBar>

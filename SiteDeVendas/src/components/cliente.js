@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import MenuCliente from "./menuCliente";
+import { useNavigate, Link } from "react-router-dom";
 
 import {
   Box,
@@ -20,6 +21,8 @@ const Cliente = () => {
   const [search, setSearch] = useState(""); // estado da barra de pesquisa
   const [openModal, setOpenModal] = useState(false);
   const [produtoSelecionado, setProdutoSelecionado] = useState(null);
+
+  const navigate = useNavigate();
 
   const [categoriaSelecionada, setCategoriaSelecionada] = useState(null);
 
@@ -293,6 +296,15 @@ const Cliente = () => {
         <Typography variant="body2">
           &copy; {new Date().getFullYear()} Minha Loja. Todos os direitos reservados.
         </Typography>
+
+        {/* botao para ir para admin */}
+        <Button
+          variant="contained"
+          sx={{ bgcolor: "#1976d2", mt: 1 }}
+          onClick={() => navigate("/login")}
+        >
+          Ir para Admin
+        </Button>
       </Box>
     </div>
   );
