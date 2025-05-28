@@ -21,6 +21,7 @@ const EditarProduto = () => {
   const { idProduto } = useParams(); // id  da URL
   const navigate = useNavigate(); // redirecionar após a edição
 
+  var usuario = localStorage.getItem("USUARIO");
   var [nome, setNome] = useState("");
   var [quantidade, setQuantidade] = useState("");
   var [categoria, setCategoria] = useState("");
@@ -38,12 +39,9 @@ const EditarProduto = () => {
   }, []);
 
   const carregarProduto = async () => {
-    var url = `https://backend-completo.vercel.app/app/produtos`;
+    var url = `https://backend-completo.vercel.app/app/produtos/${usuario}`;
     var token = localStorage.getItem("ALUNO_ITE");
 
-    //teste
-    console.log("Token:", token);
-    console.log("URL da requisição:", url);
 
     await axios
       .get(url, {
@@ -52,13 +50,11 @@ const EditarProduto = () => {
       .then((retorno) => {
         if (retorno.data.error) {
           alert(retorno.data.error + " Erro ao carregar produto");
-          console.log(retorno);
           return;
         }
         if (retorno.status === 200) {
-          const produtoSelecionado =
-            // find = testa um por um e compara com o ID
-            retorno.data.find((prod) => prod._id === idProduto);
+          // find = testa um por um e compara com o ID
+          const produtoSelecionado = retorno.data.find((prod) => prod._id === idProduto);
           //se ele achar o ID, ele seta o nome da categoria na variavel
 
           setNome(produtoSelecionado.nome);
@@ -68,7 +64,7 @@ const EditarProduto = () => {
           setDescricao(produtoSelecionado.descricao);
           setImagem(produtoSelecionado.imagem);
 
-          console.log(produtoSelecionado);
+        
         }
       });
   };
@@ -76,18 +72,20 @@ const EditarProduto = () => {
   const editarProduto = async () => {
     var url = `https://backend-completo.vercel.app/app/produtos`;
     var dados = {
-      nome,
-      quantidade,
-      preco,
-      descricao,
-      imagem,
+      id: idProduto,
+      nome: nome,
+      quantidade: quantidade,
+      preco: preco,
+      descricao: descricao,
+      categoria: categoria,
+      imagem: imagem
     };
     var token = localStorage.getItem("ALUNO_ITE");
 
     await axios.put(url, dados, { headers: { Authorization: `Bearer ${token}` } }).then((retorno) => {
       if (retorno.data.error) {
         alert(retorno.data.error + " Erro ao editar produto");
-        console.log(retorno);
+        console.log("teste:",retorno);
         return;
       }
       if (retorno.status === 200) {

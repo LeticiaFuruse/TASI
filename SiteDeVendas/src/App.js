@@ -52,13 +52,14 @@ const App = () => {
                     {/* Rotas públicas */}
                     <Route path="/login" element={<Login />} />
                     <Route path="/registro" element={<Registro />} />
-                    <Route path="/cliente" element={<Cliente />} />
+                    
+                    <Route path="/" element={<Cliente />} />
 
 
                     
                     {/* Rotas protegidas */}
                     <Route element={<Middleware />}>
-                        <Route path="/" element={<Dashboard />} />
+                       
                         <Route path="/pessoas" element={<Pessoas />} />
                         <Route path="/produtos" element={<Produtos />} />
                         <Route path="/listarProduto" element={<ListarProduto />} />

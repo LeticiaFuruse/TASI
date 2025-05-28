@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Menu from "./menu";
+import { useNavigate } from "react-router-dom";
+
 import {
   Box,
   Paper,
@@ -21,6 +23,7 @@ const Venda = () => {
     var [data, setData] = useState('')
     var [produtos, setProdutos] = useState([])
     const [produtosVendidos, setProdutosVendidos] = useState([])
+    const navigate = useNavigate()
 
     var usuario = localStorage.getItem("USUARIO");
 
@@ -28,10 +31,12 @@ const Venda = () => {
     const criarVenda = async () => {
         var url = "https://backend-completo.vercel.app/app/venda"
         var dados = {
+            usuario: usuario,
             nomeCliente: nomeCliente,
             data: data,
             produtos: produtosVendidos 
         }
+        console.log("variaveis", usuario, nomeCliente, data, produtosVendidos)
         var token = localStorage.getItem("ALUNO_ITE")
         await axios.post(
             url,
@@ -46,6 +51,7 @@ const Venda = () => {
             if (retorno.data._id) {
                 alert("Registrado com sucesso")
                 console.log(retorno)
+                navigate("/listarVendas")
             }
         })
     }
