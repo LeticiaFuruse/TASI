@@ -21,6 +21,8 @@ const Cliente = () => {
   const [openModal, setOpenModal] = useState(false);
   const [produtoSelecionado, setProdutoSelecionado] = useState(null);
 
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState(null);
+
   // executar a função
   const listarProduto = async () => {
     var url = `https://backend-completo.vercel.app/app/produtos/${usuario}/`;
@@ -65,26 +67,24 @@ const Cliente = () => {
       });
   };
 
+  // Depois de listar as categorias do backend, adicionamos "Todos" manualmente
   const listarCategorias = async () => {
-    var url = "https://backend-completo.vercel.app/app/categorias"
-    var token = localStorage.getItem("ALUNO_ITE")
+    var url = "https://backend-completo.vercel.app/app/categorias";
+    var token = localStorage.getItem("ALUNO_ITE");
 
-    await axios.get(
-      url,
-      { headers: { Authorization: `Bearer ${token}` } }
-    ).then(retorno => {
-      console.log(retorno)
+    await axios.get(url, { headers: { Authorization: `Bearer ${token}` } }).then((retorno) => {
       if (retorno.data.error) {
-        alert(retorno.data.error + " Erro ao mostrar")
-        console.log(retorno)
-        return
+        alert(retorno.data.error + " Erro ao mostrar");
+        return;
       }
       if (retorno.status === 200) {
-        setCategorias(retorno.data)
-        console.log(retorno)
+        // Insere "Todos" no início da lista
+        setCategorias([{ _id: "todos", nome: "Todos" }, ...retorno.data]);
+        // Seleciona "Todos" inicialmente para mostrar todos os produtos
+        setCategoriaSelecionada("Todos");
       }
-    })
-  }
+    });
+  };
 
   const handleOpenModal = (produto) => {
     setProdutoSelecionado(produto);
@@ -111,6 +111,12 @@ const Cliente = () => {
     localStorage.setItem("CARRINHO", JSON.stringify(carrinho));
     alert("Produto adicionado no carrinho!");
   };
+
+  // filtrar produto
+  const produtosFiltrados =
+    categoriaSelecionada && categoriaSelecionada !== "Todos"
+      ? produtos.filter((p) => p.categoria === categoriaSelecionada)
+      : produtos;
 
 
   // Chama a função assim que o componente carregar
@@ -159,8 +165,9 @@ const Cliente = () => {
             {categorias.map((cat) => (
               <Button
                 key={cat._id}
-                variant="outlined"
+                variant={categoriaSelecionada === cat.nome ? "contained" : "outlined"}
                 sx={{ color: "white", borderColor: "gray" }}
+                onClick={() => setCategoriaSelecionada(cat.nome)}
               >
                 {cat.nome}
               </Button>
@@ -169,7 +176,8 @@ const Cliente = () => {
 
           {/* Lista de Produtos */}
           <Grid container spacing={3}>
-            {produtos.map((produto) => (
+            {produtosFiltrados.map((produto) => (
+
               <Grid item xs={12} sm={6} md={4} key={produto._id}>
                 <Paper
                   sx={{

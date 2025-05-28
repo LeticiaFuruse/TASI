@@ -27,6 +27,7 @@ import EditarCategoria from './components/editarCategoria';
 import LimparTabelas from './components/limparTabelas';
 
 import Cliente from './components/cliente';
+import Carrinho from './components/carrinho';
 
 
 
@@ -54,6 +55,7 @@ const App = () => {
                     <Route path="/registro" element={<Registro />} />
                     
                     <Route path="/" element={<Cliente />} />
+                    <Route path="/carrinho" element={<Carrinho />} />
 
 
                     

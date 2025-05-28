@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate, Link } from "react-router-dom";
 import {
   CssBaseline,
   AppBar,
@@ -20,7 +21,10 @@ return (
             Loja Online
           </Typography>
 
-          <Tooltip title="Carrinho">
+          <Tooltip title="Carrinho"
+          component={Link}
+          to="/carrinho"
+          >
             <IconButton color="inherit">
               <img
                 src="/carrinho-compra.png"
