@@ -16,6 +16,7 @@ import {
   TablePagination,
   IconButton,
   CssBaseline,
+  Tooltip,
 } from "@mui/material";
 
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -93,134 +94,68 @@ const ListarProduto = () => {
   };
 
   return (
-  <CssBaseline>
+    <CssBaseline>
       <Menu /> {/* Toolbar ADMIN visível em todas as páginas */}
-    <Box sx={{ p: 3 }}>
-      <Typography
-        variant="h4"
-        gutterBottom
-        align="center"
-        sx={{ fontSize: "36px", fontWeight: "bold", color: "#333333" }}
-      >
-        Produtos
-      </Typography>
+      <Box sx={{ p: 3 }}>
+        <Typography
+          variant="h4"
+          gutterBottom
+          align="center"
+          sx={{ fontSize: "36px", fontWeight: "bold", color: "#333333" }}
+        >
+          Produtos
+        </Typography>
 
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="Produtos Table">
-          <TableHead>
-            <TableRow>
-              <TableCell
-                sx={{
-                  fontSize: "18px",
-                  backgroundColor: "#333333",
-                  color: "white",
-                  borderRight: "1px solid #ddd", // Linha entre as colunas
-                }}
-              >
-                Usuário
-              </TableCell>
-              <TableCell
-                sx={{
-                  fontSize: "18px",
-                  backgroundColor: "#333333",
-                  color: "white",
-                  borderRight: "1px solid #ddd", // Linha entre as colunas
-                }}
-              >
-                Nome
-              </TableCell>
-              <TableCell
-                sx={{
-                  fontSize: "18px",
-                  backgroundColor: "#333333",
-                  color: "white",
-                  borderRight: "1px solid #ddd", // Linha entre as colunas
-                }}
-              >
-                Quantidade
-              </TableCell>
-              <TableCell
-                sx={{
-                  fontSize: "18px",
-                  backgroundColor: "#333333",
-                  color: "white",
-                  borderRight: "1px solid #ddd", // Linha entre as colunas
-                }}
-              >
-                Preço
-              </TableCell>
-              <TableCell
-                sx={{
-                  fontSize: "18px",
-                  backgroundColor: "#333333",
-                  color: "white",
-                  borderRight: "1px solid #ddd", // Linha entre as colunas
-                }}
-              >
-                Categoria
-              </TableCell>
-              <TableCell
-                sx={{
-                  fontSize: "18px",
-                  backgroundColor: "#333333",
-                  color: "white",
-                  borderRight: "1px solid #ddd", // Linha entre as colunas
-                }}
-              >
-                Descrição
-              </TableCell>
-              <TableCell
-                sx={{
-                  fontSize: "18px",
-                  backgroundColor: "#333333",
-                  color: "white",
-                  borderRight: "1px solid #ddd", // Linha entre as colunas
-                }}
-              >
-                Imagem
-              </TableCell>
-              <TableCell
-                sx={{
-                  fontSize: "18px",
-                  backgroundColor: "#333333",
-                  color: "white",
-                }}
-              >
-                Ações
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {produtos
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((prod) => (
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="Produtos Table">
+            <TableHead>
+              <TableRow>
+                {["Usuário", "Nome", "Quantidade", "Preço", "Categoria", "Descrição", "Imagem", "Ações"].map(
+                  (header) => (
+                    <TableCell
+                      key={header}
+                      sx={{
+                        fontSize: "18px",
+                        backgroundColor: "#333333",
+                        color: "white",
+                        borderRight: header !== "Ações" ? "1px solid #ddd" : "none",
+                      }}
+                    >
+                      {header}
+                    </TableCell>
+                  )
+                )}
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+              {produtos.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((prod) => (
                 <TableRow key={prod._id}>
-                  <TableCell sx={{ borderRight: "1px solid #ddd" }}>
-                    {prod.usuario}
+                  <TableCell sx={{ borderRight: "1px solid #ddd" }}>{prod.usuario}</TableCell>
+                  <TableCell sx={{ borderRight: "1px solid #ddd" }}>{prod.nome}</TableCell>
+                  <TableCell sx={{ borderRight: "1px solid #ddd" }}>{prod.quantidade}</TableCell>
+                  <TableCell sx={{ borderRight: "1px solid #ddd" }}>{prod.preco}</TableCell>
+                  <TableCell sx={{ borderRight: "1px solid #ddd" }}>{prod.categoria}</TableCell>
+
+                  {/* Descrição com limite de tamanho */}
+                  <TableCell
+                    sx={{
+                      borderRight: "1px solid #ddd",
+                      maxWidth: 150,
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
+                    <Tooltip title={prod.descricao}>
+                      <span>{prod.descricao}</span>
+                    </Tooltip>
                   </TableCell>
+
                   <TableCell sx={{ borderRight: "1px solid #ddd" }}>
-                    {prod.nome}
+                    <img width={80} src={prod.imagem} alt="imagem" style={{ objectFit: "cover" }} />
                   </TableCell>
-                  <TableCell sx={{ borderRight: "1px solid #ddd" }}>
-                    {prod.quantidade}
-                  </TableCell>
-                  <TableCell sx={{ borderRight: "1px solid #ddd" }}>
-                    {prod.preco}
-                  </TableCell>
-                  <TableCell sx={{ borderRight: "1px solid #ddd" }}>
-                    {prod.categoria}
-                  </TableCell>
-                  <TableCell sx={{ borderRight: "1px solid #ddd" }}>
-                    {prod.descricao}
-                  </TableCell>
-                  <TableCell sx={{ borderRight: "1px solid #ddd" }}>
-                    <img
-                      width={80}
-                      src={prod.imagem}
-                      alt="imagem"
-                      style={{ objectFit: "cover" }}
-                    />
-                  </TableCell>
+
                   <TableCell>
                     <Box display="flex" justifyContent="space-around">
                       <Link to={`/editarProduto/${prod._id}`}>
@@ -228,33 +163,28 @@ const ListarProduto = () => {
                           <EditIcon />
                         </IconButton>
                       </Link>
-                      <IconButton
-                        color="error"
-                        onClick={() => excluirProduto(prod._id)}
-                      >
+                      <IconButton color="error" onClick={() => excluirProduto(prod._id)}>
                         <DeleteIcon />
                       </IconButton>
                     </Box>
                   </TableCell>
                 </TableRow>
               ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableBody>
+          </Table>
+        </TableContainer>
 
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        count={produtos.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Box>
-  </CssBaseline>
-
-
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={produtos.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Box>
+    </CssBaseline>
   );
 };
 
